@@ -1,78 +1,88 @@
 ---
-title: "TIBS documentation"
-description: "Product, legal, and platform guidance for TIBS"
+title: "Introducing TIBS"
+description: "A guide for riders, participants, and visitors using the linked TIBS experiences"
 ---
 
 <Note>
-  Welcome to the main documentation hub for TIBS.
+  TIBS is one connected platform. The rider, survey, and learning experiences
+  are linked, so the page you use depends on what you want to do.
 </Note>
 
-## Start here
+## Start with your goal
 
-<Card
-  title="Read the quickstart"
-  icon="rocket"
-  href="/quickstart"
-  horizontal
->
-  Choose the right path based on what you want to do with TIBS.
-</Card>
+<CardGroup cols={2}>
+  <Card title="Report a concern" icon="rocket" href="/product/reports">
+    Share a transport issue or safety observation you personally saw.
+  </Card>
+  <Card title="Check an incident" icon="map" href="/product/incidents">
+    Follow recent or nearby incident information in the platform.
+  </Card>
+  <Card title="Look up a vehicle" icon="map" href="/product/vehicles">
+    Review a vehicle profile before or after a trip.
+  </Card>
+  <Card title="Share feedback" icon="pen-to-square" href="/product/feedback">
+    Tell TIBS how a ride felt and what should improve.
+  </Card>
+  <Card title="Search transport context" icon="terminal" href="/product/search">
+    Find routes, corridors, stops, and related transport information.
+  </Card>
+  <Card title="Explore the network" icon="book-open-cover" href="/product/network">
+    Understand how routes, corridors, and transport coverage fit together.
+  </Card>
+</CardGroup>
 
-## Documentation areas
+## How TIBS fits together
 
-<Columns cols={2}>
-  <Card
-    title="Product docs"
-    icon="map"
-    href="/product/overview"
-  >
-    Learn how reporting, incidents, vehicles, feedback, and other TIBS
-    experiences work.
-  </Card>
-  <Card
-    title="Legal docs"
-    icon="book-open-cover"
-    href="/legal/index"
-  >
-    Find privacy, reporting, participation, and related legal information.
-  </Card>
-  <Card
-    title="API docs"
-    icon="terminal"
-    href="/api-reference/introduction"
-  >
-    Explore the technical interfaces and integration surfaces used across TIBS.
-  </Card>
-  <Card
-    title="Developer docs"
-    icon="pen-to-square"
-    href="/development"
-  >
-    Run the docs site and connected TIBS services locally.
-  </Card>
-</Columns>
+TIBS has three connected experiences:
 
-## Main TIBS areas
+- the rider experience for public reporting, incidents, vehicles, feedback,
+  search, and network information
+- the survey experience for structured fieldwork and participant workflows
+  when access is granted
+- the learning experience for onboarding, progress tracking, and readiness
+  where learning is offered
 
-- report safety and service issues
-- follow incidents and live transport signals
-- look up vehicles before or after a ride
-- share ride feedback
-- explore corridors, routes, and transport coverage
-- support survey and learning programs where available
+These experiences are linked, but some areas are public and others are
+restricted.
 
-<Columns cols={2}>
-  <Card
-    title="Browse product areas"
-    href="/product/overview"
-  >
-    Start with the main TIBS experiences and follow the section most relevant
-    to you.
+## A simple way to use TIBS
+
+1. Open the page that matches your task.
+2. Read the page details before submitting anything.
+3. Use only the information you observed or experienced.
+4. Check the policy pages if you are posting content.
+5. Use survey or learning pages only if you have been invited or approved.
+
+## If you are posting content
+
+<CardGroup cols={2}>
+  <Card title="Content posting policy" href="/legal/content-posting-policy">
+    Read the rules for reports, feedback, notes, ratings, and uploads.
   </Card>
-  <Card
-    title="Visit the legal center"
-    href="/legal/index"
-  >
-    Review privacy, reporting, and participation information in one place.
+  <Card title="Privacy policy" href="/legal/privacy">
+    See how TIBS handles information across the platform.
   </Card>
-</Columns>
+  <Card title="Child safety policy" href="/legal/child-safety-protection">
+    Review the rules for minors and child safety-related concerns.
+  </Card>
+  <Card title="Reporting policy" href="/legal/reporting-policy">
+    Read the narrower reporting rules for incident and service reports.
+  </Card>
+</CardGroup>
+
+## If you are building or supporting TIBS
+
+<CardGroup cols={2}>
+  <Card title="Product overview" href="/product/overview">
+    Read the broader map of the user-facing TIBS experiences.
+  </Card>
+  <Card title="Legal center" href="/legal/index">
+    Open the full set of policy and legal pages in one place.
+  </Card>
+  <Card title="API introduction" href="/api-reference/introduction">
+    Review the current technical interfaces and integration surfaces.
+  </Card>
+  <Card title="Development" href="/development">
+    Read the platform development guide for the connected services.
+  </Card>
+</CardGroup>

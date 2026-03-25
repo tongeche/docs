@@ -1,0 +1,187 @@
+# TIBS Content Posting Policy
+
+Draft for review only. Not yet published as a live legal page.
+
+## Purpose
+
+This Content Posting Policy explains what users may and may not submit through
+TIBS.
+
+It is intended to help keep TIBS useful, lawful, and safe for riders,
+contributors, platform participants, and the public.
+
+This draft is based on the current TIBS reporting, feedback, incident, legal,
+and development notes available as of 25 March 2026.
+
+## Scope
+
+This policy applies to content submitted or shared through TIBS, including:
+
+- incident reports
+- service reports
+- ride feedback
+- written notes or descriptions
+- ratings, votes, or other community input
+- photos or other uploads where supported
+- any other user-generated content submitted through TIBS services
+
+## What TIBS Allows
+
+TIBS is intended for transport-related reporting and rider awareness.
+
+Users may submit content that:
+
+- relates to a real public transport experience, observation, or safety concern
+- is shared in good faith
+- is reasonably accurate to the best of the user’s knowledge
+- focuses on transport operations, service quality, safety, or commuter
+  conditions
+- helps other users understand vehicle, corridor, route, or incident context
+
+Examples of generally permitted content include:
+
+- reporting dangerous driving
+- reporting unsafe vehicle conditions
+- reporting overcrowding or unsafe stop conditions
+- describing service disruptions or fare irregularities
+- submitting ride feedback about cleanliness, safety, or conduct
+- uploading relevant supporting images where image uploads are supported
+
+## User Responsibilities
+
+Anyone posting content on TIBS must:
+
+- report only what they personally observed, experienced, or reasonably
+  believe to be true
+- keep submissions relevant to the platform’s transport and safety purpose
+- use respectful language
+- avoid exaggeration, speculation, or unsupported accusations
+- avoid including personal information unless it is clearly necessary and
+  appropriate
+- comply with applicable law when using the platform
+
+## Prohibited Content
+
+Users must not submit, post, upload, or share content that:
+
+- is false, intentionally misleading, manipulated, or submitted in bad faith
+- is defamatory, abusive, threatening, harassing, or hateful
+- is designed to shame, target, or incite harm against any person or group
+- includes unnecessary personal information about identifiable individuals
+- includes phone numbers, personal addresses, identification numbers, or other
+  private personal data without a lawful and necessary reason
+- impersonates another person or falsely suggests official verification,
+  approval, or endorsement
+- promotes illegal activity or is used to coordinate harmful conduct
+- contains spam, repetitive submissions, or attempts to manipulate platform
+  visibility or reputation signals
+- contains sexual content, exploitative content, or any content involving child
+  exploitation or abuse
+- violates the TIBS Child Safety & Protection Policy
+
+For child-safety matters, users should also review the TIBS Child Safety &
+Protection Policy at `/legal/child-safety-protection`.
+
+## Content About Individuals
+
+TIBS is designed to support transport awareness, not personal targeting.
+
+Users should focus on:
+
+- the transport event
+- the vehicle or route context
+- the safety or service issue
+- the time and place of the observation
+
+Users should not use TIBS to:
+
+- publish unnecessary details about private individuals
+- identify passengers or bystanders without a clear and legitimate reason
+- insult, mock, or shame drivers, crew, riders, or members of the public
+- make criminal or legal accusations as though they were established facts
+
+## Photos and Uploads
+
+Where TIBS allows photo or file uploads, users may only upload material that:
+
+- relates directly to the transport event, ride, or issue being reported
+- they are allowed to share
+- does not unnecessarily expose personal or sensitive information
+- does not put individuals, especially minors, at additional risk
+
+Users must not upload content that:
+
+- is unrelated to the report or feedback
+- is altered in a misleading way
+- contains graphic, exploitative, or abusive material
+- is sexualized or inappropriate
+- creates avoidable privacy or safety risks for passengers, drivers, crew, or
+  the public
+
+## Child Safety
+
+TIBS maintains a zero-tolerance approach to any content or platform use that
+exploits, harms, or endangers children.
+
+Users must not submit content that:
+
+- depicts or references child exploitation or abuse
+- sexualizes or inappropriately describes minors
+- enables grooming, coercion, or harmful contact involving minors
+- exposes minors to avoidable privacy, safety, or reputational risk
+
+Any suspected violation may be removed immediately and escalated as required by
+law or platform policy.
+
+For more detail, see the TIBS Child Safety & Protection Policy at
+`/legal/child-safety-protection`.
+
+## Platform Moderation
+
+TIBS currently uses its own moderation systems together with human manual
+moderators to review content and reduce misuse of the platform.
+
+TIBS may:
+
+- review submitted content
+- delay, limit, remove, or refuse publication of content
+- reduce the visibility of content that appears unreliable, harmful, abusive,
+  or off-topic
+- request clarification where appropriate
+- suspend or restrict users who misuse the platform
+
+TIBS is not required to publish all submitted content.
+
+## Enforcement
+
+Violations of this policy may result in one or more of the following actions:
+
+- content removal
+- reduced visibility of content
+- warnings or temporary restrictions
+- suspension or permanent termination of access
+- restriction from future participation
+- referral to relevant authorities where required by law
+
+## TIBS Platform Role
+
+TIBS is a platform for user-submitted transport information and rider awareness.
+
+Unless clearly stated otherwise:
+
+- user submissions are not automatically verified
+- publication on TIBS does not mean TIBS has confirmed the accuracy of a claim
+- content on the platform should not be treated as an official legal finding,
+  government record, or formal accusation
+
+For privacy-related questions, users should also review the TIBS Privacy
+Policy at `/legal/privacy`.
+
+## Reporting Concerns
+
+Users who encounter content that may violate this policy should report it
+promptly.
+
+- privacy@tisabs.com
+
+In-platform reporting tools may also be used where available.
