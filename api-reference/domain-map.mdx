@@ -1,0 +1,53 @@
+---
+title: "API domain map"
+description: "Current app routes, Supabase RPCs, and domain ownership in TIBS"
+---
+
+## Current implementation layer
+
+The current TIBS API surface is not a single standalone REST service yet.
+
+Today it is a mix of:
+
+- Next.js route handlers in `tibs`
+- Next.js route handlers in `tibs-survey`
+- client and server calls into Supabase RPCs
+- a draft external OpenAPI contract in this docs repo
+
+## Domain map
+
+| Domain | Current app surfaces | Current backend contract |
+| --- | --- | --- |
+| Reports | `/report`, `/vehicles/[publicCode]/report`, `POST /api/report-incident` | `submit_incident_report`, `submit_incident_report_without_vehicle` |
+| Incidents | `/`, `/maps`, `/incidents/[incidentId]` | `get_latest_incident_feed`, `get_incident_feed_in_bounds`, `get_incident_feed_detail`, `get_reporter_incident_votes` |
+| Vehicles | `/vehicles`, `/vehicles/[publicCode]`, `/scan`, `GET /api/vehicle-lookup` | `search_vehicle_profiles`, `get_vehicle_profile`, `get_vehicle_feedback`, `get_vehicle_feedback_sentiment_counts`, `get_vehicle_incidents`, `scan_vehicle_qr` |
+| Feedback | `/rate`, `/vehicles/[publicCode]/rate`, `POST /rate/submit` | `submit_ride_feedback` |
+| Network | `GET /api/corridor-map`, `GET /api/map-search` | `resolve_corridor_for_location`, corridor and POI table reads, sacco alias functions |
+| Surveyor | `/assignments`, `/survey/new`, `POST /api/session/*`, `POST /api/assignments/claim`, `POST /api/submissions` | `start_surveyor_session`, `touch_surveyor_session`, `end_surveyor_session`, `claim_assignment_slot`, `submit_vehicle_collection_entry` |
+| Learning | `/courses/[slug]`, `/learn/[slug]` | `mark_learning_module_progress` plus direct reads on learning progress tables |
+| Legal acceptance | project document pages, `POST /api/documents/[documentKey]/accept` | `user_document_acceptances` upsert flow |
+
+## Repo ownership
+
+The implementation is currently split like this:
+
+- `tibs`: public rider app, incidents, vehicles, feedback, maps
+- `tibs-survey`: surveyor operations, assignments, document acceptance
+- `tibs-learning-center`: courses, readiness, learning progress
+
+## Read and write split
+
+The existing codebases already show a clear pattern:
+
+- write through route handlers and RPCs
+- read through pre-shaped feeds and summaries
+- keep internal processing and review tables out of public contracts
+
+## Critical rules from the current repos
+
+- do not expose internal incident clustering tables as public API
+- prefer read-optimized incident and vehicle summaries for public views
+- treat service-area checks and corridor resolution as contract-level behavior
+- keep surveyor and admin review flows restricted
+- treat the OpenAPI spec here as a draft external contract until the app routes
+  are stabilized into a formal public API

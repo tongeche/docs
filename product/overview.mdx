@@ -1,0 +1,60 @@
+---
+title: "Product overview"
+description: "High-level map of the TIBS product surface"
+---
+
+## Current domain map
+
+The current product structure is based on the endpoint and table mapping in
+`references/tibs_ref.md`.
+
+<CardGroup cols={2}>
+  <Card title="Reports" href="/product/reports">
+    Capture field reports, media, and reporter location samples.
+  </Card>
+  <Card title="Incidents" href="/product/incidents">
+    Read public incident feeds, nearby incidents, and incident detail.
+  </Card>
+  <Card title="Vehicles" href="/product/vehicles">
+    Look up public vehicle profiles, routes, and incident history.
+  </Card>
+  <Card title="Feedback" href="/product/feedback">
+    Store ride feedback and expose vehicle feedback summaries.
+  </Card>
+  <Card title="Search" href="/product/search">
+    Resolve mixed queries across vehicles, saccos, and routes.
+  </Card>
+  <Card title="Network" href="/product/network">
+    Work with corridors, routes, saccos, and their summaries.
+  </Card>
+  <Card title="Surveyor" href="/product/surveyor">
+    Manage surveyor sessions, assignments, and daily stats.
+  </Card>
+  <Card title="Learning" href="/product/learning">
+    Serve courses, modules, and learner progress.
+  </Card>
+</CardGroup>
+
+## Core pattern
+
+The main pattern visible in the current reference notes is:
+
+- Write raw reports and feedback first
+- Process raw records into incidents and summaries
+- Read from optimized feeds and summary tables
+- Keep restricted admin workflows separate from public-facing reads
+
+## Current implementation ownership
+
+- `tibs` implements the main public transport safety product, including
+  reporting, incident views, vehicle lookup, maps, coverage, terms, and
+  privacy pages.
+- `tibs-survey` implements surveyor operations, assignments, project-scoped
+  dashboards, expense claims, payouts, documents, and admin review flows.
+- `tibs-learning-center` implements course discovery, lessons, assessments,
+  and learning progress.
+
+## Restricted surfaces
+
+Admin and review operations exist, but they should remain clearly marked as
+restricted or internal wherever they are documented.

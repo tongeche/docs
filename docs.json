@@ -1,68 +1,99 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mint Starter Kit",
+  "name": "TIBS Documentation",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#0891b2",
+    "light": "#06b6d4",
+    "dark": "#0e7490"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "/favicon.ico",
   "navigation": {
     "tabs": [
       {
-        "tab": "Guides",
+        "tab": "Overview",
         "groups": [
           {
-            "group": "Getting started",
+            "group": "Start here",
             "pages": [
               "index",
               "quickstart",
-              "development"
+              "development",
+              "repositories"
             ]
           },
           {
-            "group": "Customization",
+            "group": "Documentation sets",
             "pages": [
-              "essentials/settings",
-              "essentials/navigation"
-            ]
-          },
-          {
-            "group": "Writing content",
-            "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/reusable-snippets"
-            ]
-          },
-          {
-            "group": "AI tools",
-            "pages": [
-              "ai-tools/cursor",
-              "ai-tools/claude-code",
-              "ai-tools/windsurf"
+              "product/overview",
+              "legal/index",
+              "api-reference/introduction"
             ]
           }
         ]
       },
       {
-        "tab": "API reference",
+        "tab": "Product",
         "groups": [
           {
-            "group": "API documentation",
+            "group": "Core workflows",
             "pages": [
-              "api-reference/introduction"
+              "product/reports",
+              "product/incidents",
+              "product/vehicles",
+              "product/feedback",
+              "product/search"
             ]
           },
           {
-            "group": "Endpoint examples",
+            "group": "Network and operations",
             "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              "product/network",
+              "product/surveyor",
+              "product/learning"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Repositories",
+        "groups": [
+          {
+            "group": "Repo guides",
+            "pages": [
+              "repositories",
+              "repositories/tibs",
+              "repositories/tibs-survey",
+              "repositories/tibs-learning-center",
+              "repositories/shared-auth"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Legal",
+        "groups": [
+          {
+            "group": "Legal center",
+            "pages": [
+              "legal/index",
+              "legal/privacy-policy",
+              "legal/reporting-policy",
+              "legal/surveyor-participation-agreement",
+              "legal/terms-of-service",
+              "legal/data-processing"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "API",
+        "groups": [
+          {
+            "group": "Reference map",
+            "pages": [
+              "api-reference/introduction",
+              "api-reference/domain-map"
             ]
           }
         ]
@@ -71,52 +102,40 @@
     "global": {
       "anchors": [
         {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
+          "anchor": "GitHub",
+          "href": "https://github.com/tongeche/docs",
+          "icon": "github"
         }
       ]
     }
   },
   "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+    "light": "/logo/tibs_logo_light.svg",
+    "dark": "/logo/tibs-logo-dark.svg"
   },
   "navbar": {
     "links": [
       {
-        "label": "Support",
-        "href": "mailto:hi@mintlify.com"
+        "label": "GitHub",
+        "href": "https://github.com/tongeche/docs"
       }
-    ],
-    "primary": {
-      "type": "button",
-      "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
-    }
+    ]
   },
   "contextual": {
     "options": [
-     "copy",
-     "view",
-     "chatgpt",
-     "claude",
-     "perplexity",
-     "mcp",
-     "cursor",
-     "vscode"
-   ]
+      "copy",
+      "view",
+      "chatgpt",
+      "claude",
+      "perplexity",
+      "mcp",
+      "cursor",
+      "vscode"
+    ]
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+      "github": "https://github.com/tongeche/docs"
     }
   }
 }

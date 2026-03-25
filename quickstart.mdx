@@ -1,80 +1,67 @@
 ---
 title: "Quickstart"
-description: "Start building awesome documentation in minutes"
+description: "Choose the right path through the TIBS documentation set"
 ---
 
-## Get started in three steps
+## Use this documentation by role
 
-Get your documentation site running locally and make your first customization.
+### Product and operations readers
 
-### Step 1: Set up your local environment
+1. Start on [TIBS documentation](/).
+2. Open [Product overview](/product/overview) to find the relevant domain.
+3. Move to [API introduction](/api-reference/introduction) if you need
+   endpoint-level guidance.
+4. Check [Legal center](/legal/index) for policy, privacy, and contractual
+   documents.
 
-<AccordionGroup>
-  <Accordion icon="copy" title="Clone your docs locally">
-    During the onboarding process, you created a GitHub repository with your docs content if you didn't already have one. You can find a link to this repository in your [dashboard](https://dashboard.mintlify.com).
-    
-    To clone the repository locally so that you can make and preview changes to your docs, follow the [Cloning a repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) guide in the GitHub docs.
-  </Accordion>
-  <Accordion icon="rectangle-terminal" title="Start the preview server">
-    1. Install the Mintlify CLI: `npm i -g mint`
-    2. Navigate to your docs directory and run: `mint dev`
-    3. Open `http://localhost:3000` to see your docs live!
-    
-    <Tip>Your preview updates automatically as you edit files.</Tip>
-  </Accordion>
-</AccordionGroup>
+### API integrators
 
-### Step 2: Deploy your changes
+1. Read [API introduction](/api-reference/introduction).
+2. Use [API domain map](/api-reference/domain-map) to find the correct
+   endpoint family.
+3. Cross-check the matching product page to understand intent and boundaries.
+4. Treat the domain map as the current source of truth until the full OpenAPI
+   spec is published.
 
-<AccordionGroup>
-  <Accordion icon="github" title="Install our GitHub app">
-    Install the Mintlify GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app).
-    
-    Our GitHub app automatically deploys your changes to your docs site, so you don't need to manage deployments yourself.
-</Accordion>
-<Accordion icon="palette" title="Update your site name and colors">
-    For a first change, let's update the name and colors of your docs site.
+### Legal and compliance reviewers
 
-    1. Open `docs.json` in your editor.
-    2. Change the `"name"` field to your project name.
-    3. Update the `"colors"` to match your brand.
-    4. Save and see your changes instantly at `http://localhost:3000`.
+1. Start in [Legal center](/legal/index).
+2. Review the draft document structure for privacy, terms, and data
+   processing.
+3. Replace draft placeholders with approved legal text before public
+   publication.
 
-    <Tip>Try changing the primary color to see an immediate difference!</Tip>
-  </Accordion>
-</AccordionGroup>
+### Documentation contributors
 
-### Step 3: Go live
+1. Install the Mintlify CLI with `npm i -g mint`.
+2. From the docs repo root, run `mint dev`.
+3. Open `http://localhost:3000` to preview the site.
+4. Run `mint broken-links` before pushing changes.
 
-<Accordion icon="rocket" title="Publish your docs">
-  1. Commit and push your changes.
-  2. Your docs will update and be live in moments!
-</Accordion>
+## Current scope
 
-## Next steps
+This site is being repositioned to serve three documentation jobs:
 
-Now that you have your docs running, explore these key features:
+- Product documentation for the TIBS platform
+- API and data-surface documentation derived from source repos
+- Legal documentation for policies, terms, and regulated disclosures
+
+## Next places to go
 
 <CardGroup cols={2}>
+  <Card title="Product overview" href="/product/overview">
+    Start with the product domain map and workflow boundaries.
+  </Card>
 
-<Card title="Write Content" icon="pen-to-square" href="/essentials/markdown">
-  Learn MDX syntax and start writing your documentation.
-</Card>
+  <Card title="Legal center" href="/legal/index">
+    Centralize privacy, terms, and data-processing documents.
+  </Card>
 
-<Card title="Customize style" icon="palette" href="/essentials/settings">
-  Make your docs match your brand perfectly.
-</Card>
+  <Card title="Repositories" href="/repositories">
+    Track the source repositories that will feed this docs site.
+  </Card>
 
-<Card title="Add code examples" icon="square-code" href="/essentials/code">
-  Include syntax-highlighted code blocks.
-</Card>
-
-<Card title="API documentation" icon="code" href="/api-reference/introduction">
-  Auto-generate API docs from OpenAPI specs.
-</Card>
-
+  <Card title="Contributor guide" href="/development">
+    Run the docs locally and keep content aligned with code.
+  </Card>
 </CardGroup>
-
-<Note>
-  **Need help?** See our [full documentation](https://mintlify.com/docs) or join our [community](https://mintlify.com/community).
-</Note>

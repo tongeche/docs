@@ -1,33 +1,54 @@
 ---
-title: 'Introduction'
-description: 'Example section for showcasing API endpoints'
+title: "API introduction"
+description: "Current API reference entry point for TIBS"
 ---
 
 <Note>
-  If you're not looking to build API reference documentation, you can delete
-  this section by removing the api-reference folder.
+  The starter OpenAPI sample has not been adopted for TIBS. The current
+  reference baseline is the endpoint-to-table mapping in `references/tibs_ref.md`
+  plus the product pages in this site.
 </Note>
 
-## Welcome
+## What this section covers
 
-There are two ways to build API documentation: [OpenAPI](https://mintlify.com/docs/api-playground/openapi/setup) and [MDX components](https://mintlify.com/docs/api-playground/mdx/configuration). For the starter kit, we are using the following OpenAPI specification.
+This API section is currently organized around the real TIBS domains already
+visible in the reference notes:
+
+- Reports
+- Incidents
+- Vehicles
+- Feedback
+- Search
+- Corridors, routes, and saccos
+- Surveyor workflows
+- Learning workflows
+- Restricted admin flows
+
+## Current source of truth
+
+Until the formal OpenAPI document is ready, use the [API domain map](/api-reference/domain-map)
+and the product workflow pages together. They capture intent, likely endpoint
+families, and the data surfaces behind them.
+
+The current source repos behind those surfaces are:
+
+- `tibs` for the main transport safety platform and Supabase schema
+- `tibs-survey` for surveyor operations and project workflows
+- `tibs-learning-center` for course progress and learning flows
+
+## Next state
+
+This section should eventually contain:
+
+1. A real OpenAPI document for the selected TIBS repositories.
+2. Authentication, error, and rate-limit rules.
+3. Request and response examples.
+4. Webhook or event documentation where applicable.
 
 <Card
-  title="Plant Store Endpoints"
-  icon="leaf"
-  href="https://github.com/mintlify/starter/blob/main/api-reference/openapi.json"
+  title="Browse the API domain map"
+  icon="map"
+  href="/api-reference/domain-map"
 >
-  View the OpenAPI specification file
+  Start from the current endpoint families and workflow boundaries.
 </Card>
-
-## Authentication
-
-All API endpoints are authenticated using Bearer tokens and picked up from the specification file.
-
-```json
-"security": [
-  {
-    "bearerAuth": []
-  }
-]
-```

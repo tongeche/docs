@@ -1,0 +1,60 @@
+---
+title: "Repositories"
+description: "Source repositories that feed this documentation site"
+---
+
+<Note>
+  This page is the control point for the multi-repo TIBS docs setup. The three
+  source repos are now confirmed.
+</Note>
+
+## What belongs here
+
+This docs site is meant to consolidate stable documentation that would
+otherwise be scattered across multiple code repositories.
+
+Typical repo-derived content includes:
+
+- Setup and environment requirements
+- Architecture and service boundaries
+- API contracts and integration notes
+- Operational workflows
+- Release or deployment guidance
+
+## Confirmed repos
+
+<CardGroup cols={2}>
+  <Card title="tibs" href="/repositories/tibs">
+    Main transport safety platform, data model, and public product surfaces.
+  </Card>
+  <Card title="tibs-survey" href="/repositories/tibs-survey">
+    Invite-only surveyor, assignments, payouts, and project operations app.
+  </Card>
+  <Card title="tibs-learning-center" href="/repositories/tibs-learning-center">
+    Standalone learning surface with courses, assessments, and progress.
+  </Card>
+  <Card title="Shared auth" href="/repositories/shared-auth">
+    How the three apps share Supabase identity without sharing cookies.
+  </Card>
+</CardGroup>
+
+## How these repos relate
+
+- `tibs` owns the main public product experience and most transport safety
+  workflows.
+- `tibs-survey` handles field operations, surveyor workflows, documents,
+  projects, expenses, and payout flows.
+- `tibs-learning-center` delivers course content, assessments, and learner
+  progress.
+- All three apps are designed to share the same Supabase project and auth user
+  identities.
+
+## Documentation approach
+
+Each repo page should capture:
+
+1. Purpose
+2. Setup and environment
+3. Current route and feature surface
+4. Deployment entrypoints
+5. Source documents that should be pulled into this docs site

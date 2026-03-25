@@ -1,97 +1,97 @@
 ---
-title: "Introduction"
-description: "Welcome to the new home for your documentation"
+title: "TIBS documentation"
+description: "Product, API, repository, and legal documentation for TIBS and Tisab"
 ---
 
-## Setting up
+<Note>
+  This site is being converted from the Mintlify starter into the main
+  documentation hub for TIBS. Product docs are now scaffolded. Legal and
+  repo-specific content will be filled from the selected source repositories.
+</Note>
 
-Get your documentation site up and running in minutes.
+## Start here
 
 <Card
-  title="Start here"
+  title="Read the quickstart"
   icon="rocket"
   href="/quickstart"
   horizontal
 >
-  Follow our three step quickstart guide.
+  Use the docs by role: product reader, API integrator, legal reviewer, or
+  contributor.
 </Card>
 
-## Make it yours
-
-Design a docs site that looks great and empowers your users.
+## Documentation areas
 
 <Columns cols={2}>
   <Card
-    title="Edit locally"
-    icon="pen-to-square"
-    href="/development"
-  >
-    Edit your docs locally and preview them in real time.
-  </Card>
-  <Card
-    title="Customize your site"
-    icon="palette"
-    href="/essentials/settings"
-  >
-    Customize the design and colors of your site to match your brand.
-  </Card>
-    <Card
-    title="Set up navigation"
+    title="Product docs"
     icon="map"
-    href="/essentials/navigation"
+    href="/product/overview"
   >
-    Organize your docs to help users find what they need and succeed with your product.
+    Core workflows, operating domains, and data surfaces across TIBS.
   </Card>
   <Card
-    title="API documentation"
+    title="API docs"
     icon="terminal"
     href="/api-reference/introduction"
   >
-    Auto-generate API documentation from OpenAPI specifications.
+    Endpoint map, domain boundaries, and the path to a full OpenAPI spec.
+  </Card>
+  <Card
+    title="Legal docs"
+    icon="book-open-cover"
+    href="/legal/index"
+  >
+    Privacy, terms, and data-processing documents in one controlled section.
+  </Card>
+  <Card
+    title="Repository docs"
+    icon="github"
+    href="/repositories"
+  >
+    A single docs site that can pull structure and reference material from
+    multiple repos.
   </Card>
 </Columns>
 
-## Create beautiful pages
+## Current product surfaces
 
-Everything you need to create world-class documentation.
+The current documentation scaffold is based on the endpoint-to-table mapping in
+`references/tibs_ref.md`. The main TIBS domains already identified are:
+
+- Reports
+- Incidents
+- Vehicles
+- Feedback
+- Search
+- Corridors, routes, and saccos
+- Surveyor operations
+- Learning
+- Restricted admin flows
 
 <Columns cols={2}>
   <Card
-    title="Write with MDX"
-    icon="pen-fancy"
-    href="/essentials/markdown"
+    title="Browse product domains"
+    href="/product/overview"
   >
-    Use MDX to style your docs pages.
+    Start from a domain overview and then drill into the workflows that matter.
   </Card>
   <Card
-    title="Code samples"
-    icon="code"
-    href="/essentials/code"
+    title="See the API map"
+    href="/api-reference/domain-map"
   >
-    Add sample code to demonstrate how to use your product.
-  </Card>
-  <Card
-    title="Images"
-    icon="image"
-    href="/essentials/images"
-  >
-    Display images and other media.
-  </Card>
-  <Card
-    title="Reusable snippets"
-    icon="recycle"
-    href="/essentials/reusable-snippets"
-  >
-    Write once and reuse across your docs.
+    Use the current endpoint map until the formal OpenAPI document is ready.
   </Card>
 </Columns>
 
-## Need inspiration?
+## Contributing
 
 <Card
-  title="See complete examples"
-  icon="stars"
-  href="https://mintlify.com/customers"
+  title="Contributor guide"
+  icon="pen-to-square"
+  href="/development"
 >
-  Browse our showcase of exceptional documentation sites.
+  Run the site locally, validate links, and keep content aligned with the
+  selected repos.
 </Card>

@@ -1,0 +1,88 @@
+---
+title: "tibs-survey"
+description: "Invite-only surveyor and project operations application"
+---
+
+## Purpose
+
+`tibs-survey` is a separate application for surveyor operations and project
+management. It handles invite-only access, project-scoped workflows, survey
+submissions, assignments, expense claims, payout operations, and internal admin
+review.
+
+## Stack
+
+- Next.js 16 App Router
+- React 19
+- Tailwind CSS v4
+- pnpm
+- Supabase Auth and Postgres
+- Netlify
+- Brevo transactional email
+- M-Pesa payout integration
+
+## Current feature surface
+
+The current route map includes:
+
+- auth: login, signup, forgot password, invite acceptance, auth callback
+- onboarding and access control
+- dashboard and assignments
+- survey submission and survey history
+- project dashboards under `/projects/[projectSlug]`
+- expenses, payouts, invoices, and payout invoice verification
+- documents and field documents
+- admin pages for surveyors, vehicles, payouts, slots, and approvals
+- public privacy policy page
+
+## Environment and local setup
+
+From the repo root:
+
+```bash
+pnpm install
+pnpm dev
+```
+
+Key env groups visible in `.env.example`:
+
+- Supabase public and secret keys
+- public origin and hosted-origin overrides
+- shared learning-center URL
+- admin email allowlist
+- Brevo email configuration
+- M-Pesa payout configuration
+
+## Deployment
+
+- Build command: `pnpm build`
+- Netlify config: `netlify.toml`
+- Netlify pins Node `22`
+- Scheduled Netlify functions exist for inactivity reminders and founders onboarding
+
+## Database and operations scope
+
+The migration set shows this repo owns or extends:
+
+- surveyor records and sessions
+- route assignments and assignment slots
+- expense automation and claims
+- surveyor finance entries and withdrawal requests
+- project and membership layers
+- document acceptance and approval flows
+
+## Legal and policy material already in repo
+
+- `docs/tibs_privacy_policy.md`
+- `docs/tibs_survey_participation_agreement.md`
+- rendered public privacy policy route at `/privacy-policy`
+- legal-document rendering and acceptance components in `components/legal`
+
+## Why this repo matters to this docs site
+
+This repo is the primary source for:
+
+- Surveyor system docs
+- Project operations docs
+- Internal/admin workflow docs
+- Surveyor legal and participation documents

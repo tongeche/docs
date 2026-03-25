@@ -1,0 +1,64 @@
+---
+title: "Feedback"
+description: "Ride feedback intake, evidence uploads, and sentiment summaries"
+---
+
+## Current product surfaces
+
+Ride feedback currently flows through the `tibs` app:
+
+- `/rate`
+- `/vehicles/[publicCode]/rate`
+- `POST /rate/submit`
+
+## Current implementation in code
+
+Feedback submission is handled by `apps/web/app/rate/submit/route.ts`.
+
+The handler currently:
+
+1. validates the plate and chosen sentiment
+2. resolves write access through `resolveMvpCoverageForDevice`
+3. generates or reuses a reporter device hash
+4. uploads optional evidence
+5. submits the feedback through Supabase
+6. revalidates the affected vehicle and rate pages
+
+## Evidence upload rules
+
+Optional photo evidence is managed in `ride-feedback-submission.ts`.
+
+The current upload rules are:
+
+- storage bucket: `ride-evidence`
+- allowed MIME types: `image/jpeg`, `image/png`, `image/webp`
+- maximum size: 5 MB
+- uploaded files also create rows in `media_uploads`
+
+## Supabase contract
+
+The write path currently uses:
+
+- `submit_ride_feedback`
+
+Vehicle feedback summaries are then read back through the vehicle detail
+functions, especially:
+
+- `get_vehicle_feedback`
+- `get_vehicle_feedback_sentiment_counts`
+- `get_vehicle_feedback_sentiment_counts_bulk`
+
+## Main tables behind the flow
+
+- `ride_feedback`
+- `ride_feedback_tag_links`
+- `ride_feedback_media`
+- `feedback_sentiments`
+- `feedback_tags`
+- `media_uploads`
+
+## Boundary to protect
+
+Feedback is another write path. Public product docs should center on the
+vehicle-level summary and sentiment outputs rather than exposing raw internal
+moderation or upload-processing details as a public contract.

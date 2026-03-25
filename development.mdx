@@ -1,94 +1,109 @@
 ---
-title: 'Development'
-description: 'Preview changes locally to update your docs'
+title: "Development"
+description: "Run, maintain, and expand the TIBS documentation site"
 ---
 
 <Info>
   **Prerequisites**:
   - Node.js version 19 or higher
   - A docs repository with a `docs.json` file
+  - Access to the source repositories you want documented
 </Info>
 
-Follow these steps to install and run Mintlify on your operating system.
+Use this page when you are maintaining the TIBS docs site itself.
 
 <Steps>
-<Step title="Install the Mintlify CLI">
+  <Step title="Install the Mintlify CLI">
 
 ```bash
 npm i -g mint
 ```
-</Step>
 
-<Step title="Preview locally">
+  </Step>
 
-Navigate to your docs directory where your `docs.json` file is located, and run the following command:
+  <Step title="Preview locally">
+
+Navigate to the repo root where `docs.json` is located, then run:
 
 ```bash
 mint dev
 ```
 
-A local preview of your documentation will be available at `http://localhost:3000`.
+A local preview of the documentation will be available at
+`http://localhost:3000`.
 
-</Step>
+  </Step>
 </Steps>
 
-## Custom ports
+## Documentation structure
 
-By default, Mintlify uses port 3000. You can customize the port Mintlify runs on by using the `--port` flag. For example, to run Mintlify on port 3333, use this command:
+- `index.mdx`: landing page
+- `quickstart.mdx`: role-based orientation
+- `product/`: product and workflow documentation
+- `legal/`: privacy, terms, and compliance pages
+- `api-reference/`: API overview and endpoint mapping
+- `references/`: raw working material and internal source notes
 
-```bash
-mint dev --port 3333
-```
+## Working rules
 
-If you attempt to run Mintlify on a port that's already in use, it will use the next available port:
+- Derive technical facts from the selected product repositories.
+- Do not leave Mintlify starter copy in published pages.
+- Do not invent legal language, compliance claims, or retention policies.
+- Mark draft legal pages clearly until approved text is available.
+- Prefer one source of truth per topic, then link to it from adjacent pages.
 
-```md
-Port 3000 is already in use. Trying 3001 instead.
-```
+## Validation
 
-## Mintlify versions
-
-Please note that each CLI release is associated with a specific version of Mintlify. If your local preview does not align with the production version, please update the CLI:
-
-```bash
-npm mint update
-```
-
-## Validating links
-
-The CLI can assist with validating links in your documentation. To identify any broken links, use the following command:
+Validate link integrity before pushing:
 
 ```bash
 mint broken-links
 ```
 
-## Deployment
+## Repository-driven documentation
 
-If the deployment is successful, you should see the following:
+This docs site is intended to document multiple TIBS repositories from a single
+Mintlify instance. The expected flow is:
 
-<Frame>
-  <img src="/images/checks-passed.png" alt="Screenshot of a deployment confirmation message that says All checks have passed." style={{ borderRadius: '0.5rem' }} />
-</Frame>
+1. Confirm the source repositories.
+2. Read each repo for setup, architecture, interfaces, and operational rules.
+3. Publish stable docs here instead of scattering them across READMEs.
+4. Keep repo-specific implementation details linked back to the correct source.
 
-## Code formatting
+## Custom ports
 
-We suggest using extensions on your IDE to recognize and format MDX. If you're a VSCode user, consider the [MDX VSCode extension](https://marketplace.visualstudio.com/items?itemName=unifiedjs.vscode-mdx) for syntax highlighting, and [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) for code formatting.
+By default, Mintlify uses port 3000. You can choose another port:
+
+```bash
+mint dev --port 3333
+```
+
+If port 3000 is already busy, Mintlify will try the next available port.
+
+## Updating the CLI
+
+If your preview behaves differently from production, update the CLI:
+
+```bash
+npm update -g mint
+```
 
 ## Troubleshooting
 
 <AccordionGroup>
-  <Accordion title='Error: Could not load the "sharp" module using the darwin-arm64 runtime'>
+  <Accordion title='Error: Could not load the "sharp" module'>
 
-    This may be due to an outdated version of node. Try the following:
-    1. Remove the currently-installed version of the CLI: `npm remove -g mint`
-    2. Upgrade to Node v19 or higher.
-    3. Reinstall the CLI: `npm i -g mint`
+This may be due to an outdated version of Node. Try the following:
+
+1. Remove the currently installed version of the CLI: `npm remove -g mint`
+2. Upgrade to Node v19 or higher.
+3. Reinstall the CLI: `npm i -g mint`
+
   </Accordion>
 
   <Accordion title="Issue: Encountering an unknown error">
-  
-    Solution: Go to the root of your device and delete the `~/.mintlify` folder. Then run `mint dev` again.
+
+Solution: Delete the `~/.mintlify` folder, then run `mint dev` again.
+
   </Accordion>
 </AccordionGroup>
-
-Curious about what changed in the latest CLI version? Check out the [CLI changelog](https://www.npmjs.com/package/mintlify?activeTab=versions).

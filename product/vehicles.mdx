@@ -1,0 +1,75 @@
+---
+title: "Vehicles"
+description: "Vehicle lookup, profile views, QR scan, and linked history"
+---
+
+## Current product surfaces
+
+The current vehicle experience in `tibs` is spread across:
+
+- `/vehicles`
+- `/vehicles/[publicCode]`
+- `/scan`
+- `GET /api/vehicle-lookup?q=`
+
+## Current implementation in code
+
+Vehicle discovery and detail loading currently live in
+`apps/web/src/lib/vehicles.ts`.
+
+The main entry points are:
+
+- `searchVehicleProfiles`
+- `getVehicleDetail`
+- `getVehicleFeedbackSentimentCountsBulk`
+- `scanVehicleQr`
+
+## Supabase RPCs in use
+
+The vehicle layer currently depends on:
+
+- `search_vehicle_profiles`
+- `get_vehicle_profile`
+- `get_vehicle_feedback`
+- `get_vehicle_feedback_sentiment_counts`
+- `get_vehicle_feedback_sentiment_counts_bulk`
+- `get_vehicle_incidents`
+- `scan_vehicle_qr`
+
+## Current response shape
+
+The vehicle lookup route already returns a rider-facing shape with:
+
+- `publicCode`
+- `plateNumber`
+- `routeName`
+- `originName`
+- `destinationName`
+- `safetyScore`
+- `riskLevel`
+
+The detail page then combines profile, recent feedback, sentiment counts, and
+incident history into one view model.
+
+## Lookup behavior
+
+Current lookup logic supports:
+
+- exact or partial search by plate
+- exact or partial search by public code
+- QR scan entry through `scan_vehicle_qr`
+- redirect and revalidation hooks after report and feedback submission
+
+## Main tables behind the flow
+
+- `vehicles`
+- `vehicle_saccos`
+- `vehicle_routes`
+- `ride_feedback`
+- `incidents`
+
+## Documentation goal
+
+This section should describe the stable rider-facing vehicle contract: how a
+vehicle is identified, which safety fields are public, and how linked incident
+and feedback summaries are produced.

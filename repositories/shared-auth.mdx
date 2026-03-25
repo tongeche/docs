@@ -1,0 +1,55 @@
+---
+title: "Shared auth"
+description: "Cross-app authentication model across tibs, tibs-survey, and tibs-learning-center"
+---
+
+## Goal
+
+The three TIBS apps are designed to use:
+
+- the same Supabase project
+- the same `auth.users` identities
+- the same email and password per person
+
+Users should not need separate accounts for the main app, survey app, and
+learning center.
+
+## Important rule
+
+Shared identity does not mean shared cookies.
+
+Each origin must create its own session on its own domain. Do not copy browser
+cookies between apps.
+
+## Current model
+
+The current handoff model documented in `tibs-survey/handover.md` is:
+
+1. The user authenticates against the shared Supabase project.
+2. The source app creates a normal session on its own origin.
+3. The source app generates a one-time auth link for the same user.
+4. Supabase redirects the browser into the destination app callback.
+5. The destination app establishes its own session on its own origin.
+6. The destination app redirects to the requested next page.
+
+## Apps involved
+
+- main app: `tibs.tisabs.com`
+- survey app: `vdc.tisabs.com`
+- learning center: `tibs-learning-center.netlify.app`
+
+## Why this matters in docs
+
+This shared-auth model affects:
+
+- sign-in guidance
+- redirect and callback docs
+- environment variable docs
+- hosted-origin configuration
+- cross-app navigation expectations
+
+## Primary source
+
+The strongest current source note is `tibs-survey/handover.md`, which records
+the shared-auth model across the three repos and the browser-first callback
+pattern used by the learning center.

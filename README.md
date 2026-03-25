@@ -1,55 +1,46 @@
-# Mintlify Starter Kit
+# TIBS documentation site
 
-Use the starter kit to get your docs deployed and ready to customize.
+This repository contains the Mintlify documentation site for TIBS and Tisab.
+It is being reworked from the Mintlify starter into a multi-purpose docs hub
+for product documentation, API reference material, repository-derived docs, and
+legal pages.
 
-Click the green **Use this template** button at the top of this repo to copy the Mintlify starter kit. The starter kit contains examples with
+## Current scope
 
-- Guide pages
-- Navigation
-- Customizations
-- API reference pages
-- Use of popular components
+- Product documentation for core TIBS domains
+- API and data-surface documentation
+- Legal documentation such as privacy and terms
+- Shared docs for multiple TIBS repositories
 
-**[Follow the full quickstart guide](https://starter.mintlify.com/quickstart)**
+## Repo layout
 
-## AI-assisted writing
-
-Set up your AI coding tool to work with Mintlify:
-
-```bash
-npx skills add https://mintlify.com/docs
-```
-
-This command installs Mintlify's documentation skill for your configured AI tools like Claude Code, Cursor, Windsurf, and others. The skill includes component reference, writing standards, and workflow guidance.
-
-See the [AI tools guides](/ai-tools) for tool-specific setup.
+- `docs.json`: Mintlify configuration
+- `index.mdx`: landing page
+- `quickstart.mdx`: role-based orientation
+- `development.mdx`: contributor workflow
+- `product/`: product and workflow pages
+- `legal/`: legal document pages
+- `api-reference/`: API overview and mapping
+- `references/`: raw source material and working notes
 
 ## Development
 
-Install the [Mintlify CLI](https://www.npmjs.com/package/mint) to preview your documentation changes locally. To install, use the following command:
-
-```
+```bash
 npm i -g mint
-```
-
-Run the following command at the root of your documentation, where your `docs.json` is located:
-
-```
 mint dev
 ```
 
-View your local preview at `http://localhost:3000`.
+Preview the site at `http://localhost:3000`.
 
-## Publishing changes
+Validate links before pushing:
 
-Install our GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app) to propagate changes from your repo to your deployment. Changes are deployed to production automatically after pushing to the default branch.
+```bash
+mint broken-links
+```
 
-## Need help?
+## Content rules
 
-### Troubleshooting
-
-- If your dev environment isn't running: Run `mint update` to ensure you have the most recent version of the CLI.
-- If a page loads as a 404: Make sure you are running in a folder with a valid `docs.json`.
-
-### Resources
-- [Mintlify documentation](https://mintlify.com/docs)
+- Remove starter content instead of adapting it blindly.
+- Pull technical facts from the real source repositories.
+- Do not publish draft legal pages as final legal documents.
+- Keep one canonical page per topic and link to it from adjacent sections.

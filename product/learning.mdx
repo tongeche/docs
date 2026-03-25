@@ -1,0 +1,68 @@
+---
+title: "Learning"
+description: "Learning courses, modules, readiness tracking, and progress state"
+---
+
+## Owning repo
+
+The learning product is implemented in `tibs-learning-center`.
+
+## Current product surfaces
+
+The current learning center includes:
+
+- `/`
+- `/courses/[slug]`
+- `/courses/[slug]/assessments/[assessmentId]`
+- `/learn/[slug]`
+- `/account`
+
+## Current implementation in code
+
+Progress is currently handled in
+`apps/web/src/lib/learning-progress-client.ts`.
+
+The learning client:
+
+- reads a signed-in user’s module progress from `learning_module_progress`
+- updates progress through `mark_learning_module_progress`
+- relies on shared Supabase auth with the other TIBS apps
+
+## Current schema model
+
+The main learning schema currently includes:
+
+- `learning_courses`
+- `learning_modules`
+- `learning_course_enrollments`
+- `learning_module_progress`
+
+Important current fields already present in the schema include:
+
+- course `audience` as `surveyors` or `public`
+- `is_active`
+- `readiness_enabled`
+- module `required_for_readiness`
+- module `estimated_minutes`
+
+## Current access model
+
+The learning migration already enables row-level security with this shape:
+
+- active courses and modules are publicly readable
+- authenticated users can read their own enrollments and progress
+- authenticated users can insert and update their own enrollments and progress
+
+## Supabase contract
+
+The current write-side learning action uses:
+
+- `mark_learning_module_progress`
+
+That RPC is responsible for upserting enrollment and module-progress state and
+for computing completion and readiness updates.
+
+## Documentation goal
+
+This section should explain how public learning content, surveyor readiness, and
+shared-auth state fit together. The codebase already supports all three.

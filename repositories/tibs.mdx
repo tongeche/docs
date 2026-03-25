@@ -1,0 +1,92 @@
+---
+title: "tibs"
+description: "Main platform repository for the TIBS transport safety product"
+---
+
+## Purpose
+
+`tibs` is the main platform repository. It contains the public-facing transport
+safety product, the primary Supabase schema and migrations, and most of the
+transport data model reflected in the API domain map.
+
+## Stack
+
+- npm workspaces
+- Next.js 16 web app
+- React 19
+- Tailwind CSS v4
+- TanStack Query
+- React Hook Form
+- Leaflet and MapLibre
+- Supabase and Postgres with PostGIS
+- Netlify
+
+## Workspace layout
+
+- `apps/web`: public web app
+- `apps/mobile`: placeholder for a future mobile client
+- `supabase`: schema, migrations, and seeds
+- `workers`: background and CrewAI tooling
+- `packages/shared`: shared contracts
+- `scripts`: data import and operational tooling
+- `data`: cached or seeded transport data
+
+## Current web surface
+
+The current route map includes:
+
+- `/`
+- `/vehicles`
+- `/vehicles/[publicCode]`
+- `/report`
+- `/rate`
+- `/incidents/[incidentId]`
+- `/maps`
+- `/coverage/[slug]`
+- `/learn/[slug]`
+- `/privacy`
+- `/terms`
+- `/about`
+- `/support`
+- `/offline`
+- `/scan`
+- `/account`
+
+## Environment and local setup
+
+From the repo root:
+
+```bash
+npm install
+npm run dev
+```
+
+Important env groups visible in `.env.example`:
+
+- Supabase project and browser-safe keys
+- Database connection strings
+- Direct Postgres connection details
+- Pooler connection details
+- CrewAI worker configuration
+
+## Deployment
+
+- Root command: `npm run build`
+- Web workspace command: `npm run build:web`
+- Web deploy config lives at `apps/web/netlify.toml`
+
+## Why this repo matters to this docs site
+
+This repo is the main source for:
+
+- Product workflow docs
+- API and data-surface docs
+- Reporting policy and platform behavior docs
+- Database-facing terminology used across the other repos
+
+## Source documents worth importing
+
+- `docs/architecture.md`
+- `docs/references/reporting_policy.md`
+- `docs/references/open_apis_road_safety_platform.md`
+- `docs/references/road_safety_mvp_blueprint.md`

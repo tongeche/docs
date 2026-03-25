@@ -1,34 +1,34 @@
-> **Customize this file**: Tailor this template to your project by noting specific contribution types you're looking for, adding a Code of Conduct, or adjusting the writing guidelines to match your style.
-
 # Contribute to the documentation
 
-Thank you for your interest in contributing to our documentation! This guide will help you get started.
+This repository is the shared documentation site for TIBS and Tisab. Use it to
+publish stable product docs, API docs, repository-derived reference material,
+and legal pages.
 
-## How to contribute
+## Local workflow
 
-### Option 1: Edit directly on GitHub
+1. Install the Mintlify CLI: `npm i -g mint`
+2. Run the site locally from the repo root: `mint dev`
+3. Preview changes at `http://localhost:3000`
+4. Validate links before pushing: `mint broken-links`
 
-1. Navigate to the page you want to edit
-2. Click the "Edit this file" button (the pencil icon)
-3. Make your changes and submit a pull request
+## What to document here
 
-### Option 2: Local development
+- Product workflows that should be understandable without reading code
+- API boundaries, contracts, and integration notes
+- Cross-repo concepts that deserve one canonical explanation
+- Approved legal documents and clearly marked legal drafts
 
-1. Fork and clone this repository
-2. Install the Mintlify CLI: `npm i -g mint`
-3. Create a branch for your changes
-4. Make changes
-5. Navigate to the docs directory and run `mint dev`
-6. Preview your changes at `http://localhost:3000`
-7. Commit your changes and submit a pull request
+## What not to document here
 
-For more details on local development, see our [development guide](development.mdx).
+- Leftover Mintlify starter examples
+- Speculative technical behavior not verified from source repos
+- Final legal claims that have not been reviewed and approved
+- Internal-only notes presented as public guidance
 
-## Writing guidelines
+## Writing rules
 
-- **Use active voice**: "Run the command" not "The command should be run"
-- **Address the reader directly**: Use "you" instead of "the user"
-- **Keep sentences concise**: Aim for one idea per sentence
-- **Lead with the goal**: Start instructions with what the user wants to accomplish
-- **Use consistent terminology**: Don't alternate between synonyms for the same concept
-- **Include examples**: Show, don't just tell
+- Use active voice and second person
+- Keep sentences concise
+- Prefer repo-derived facts over assumptions
+- Keep one canonical page per topic and link to it
+- Mark draft legal content clearly

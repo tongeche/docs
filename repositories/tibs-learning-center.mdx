@@ -1,0 +1,85 @@
+---
+title: "tibs-learning-center"
+description: "Standalone learning product for courses, assessments, and progress"
+---
+
+## Purpose
+
+`tibs-learning-center` is the standalone learning surface for TIBS. It is
+deployed separately from the main app but is designed to share authentication
+and backend identity with the other TIBS apps.
+
+## Stack
+
+- npm workspaces
+- Next.js 16 web app
+- React 19
+- Tailwind CSS v4
+- Supabase
+- Netlify
+
+## Current route surface
+
+The current route map shows a real learning product, including:
+
+- `/`
+- `/courses/[slug]`
+- `/courses/[slug]/assessments/[assessmentId]`
+- `/learn/[slug]`
+- `/account`
+- `/privacy`
+- `/terms`
+- `/about`
+- auth callback and recovery flows
+
+The home page and course routes are course-centric and no longer match the main
+transport safety product shell.
+
+## Current course model
+
+The app currently includes:
+
+- featured course tracks
+- learning search
+- lesson navigation
+- resources per course
+- assessments and final tests
+- learning progress summaries
+
+## Environment and local setup
+
+From the repo root:
+
+```bash
+npm install
+npm run dev
+```
+
+Key env groups visible in `.env.example`:
+
+- public learning-center origin
+- server-side origin override
+- Supabase public keys
+- optional server-side Supabase fallbacks
+- secret key for admin/server actions
+
+## Deployment
+
+- Root command: `npm run build`
+- Root Netlify config: `netlify.toml`
+- Root workspace script delegates to `@tibs-learning-center/web`
+
+## Notes on source quality
+
+Some internal docs in this repo still contain copied blueprint text from the
+main `tibs` repo. For documentation purposes, prefer the actual route and
+component structure over stale internal handoff notes when the two conflict.
+
+## Why this repo matters to this docs site
+
+This repo is the primary source for:
+
+- Learning product docs
+- Course and assessment docs
+- Shared-auth handoff details for cross-app access
+- Learning-specific privacy and terms surfaces

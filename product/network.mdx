@@ -1,0 +1,62 @@
+---
+title: "Network"
+description: "Corridors, routes, saccos, and the current coverage model"
+---
+
+## Corridors
+
+The current corridor layer in `tibs` is already more concrete than the original
+template suggested.
+
+Implemented pieces include:
+
+- corridor resolution through `resolve_corridor_for_location`
+- public coverage summaries from `corridors` and `corridor_points_of_interest`
+- map rendering through `/api/corridor-map`
+- stop and stage discovery through `/api/map-search`
+
+`getSupportedCorridorCoverage` currently reads `corridors` plus
+`corridor_points_of_interest`, deduplicates bus stops and stages, and caches the
+result for 120 seconds.
+
+## Routes
+
+Routes are currently part of the service-area and vehicle-linkage model.
+
+They appear in:
+
+- incident reports
+- vehicle profiles
+- surveyor assignments
+- vehicle collection submissions
+
+The route layer is therefore operational even though it is not yet exposed as a
+standalone rich public route docs section.
+
+## Saccos
+
+Sacco support is already implemented in the database layer through:
+
+- `saccos`
+- `sacco_aliases`
+- `match_sacco_name`
+- `find_sacco_id`
+- `upsert_sacco_alias`
+
+That means the current system can already handle canonical names plus approved
+alias matching during imports and reconciliation.
+
+## Current map contract
+
+The corridor map route can currently:
+
+- resolve a corridor from explicit `corridorId` or `corridorName`
+- resolve a corridor from coordinates
+- return corridor geometry from `corridor_map_segments`
+- return mapped points of interest from `corridor_points_of_interest`
+
+## Documentation goal
+
+Network docs should explain the transport reference layer that everything else
+depends on: corridor coverage, route membership, sacco naming, and location
+resolution. That is now a real implementation surface, not just a placeholder.

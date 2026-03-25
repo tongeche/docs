@@ -1,0 +1,61 @@
+---
+title: "Incidents"
+description: "Incident read models, live map feeds, and incident detail"
+---
+
+## Current product surfaces
+
+Incident views in the `tibs` app currently show up through:
+
+- `/`
+- `/maps`
+- `/incidents/[incidentId]`
+
+## Current implementation in code
+
+The main read layer is in `apps/web/src/lib/incidents.ts`.
+
+It exposes three primary loaders:
+
+- `getLatestIncidents`
+- `getIncidentsInBounds`
+- `getIncidentDetail`
+
+## Supabase RPCs in use
+
+Those loaders currently read through:
+
+- `get_latest_incident_feed`
+- `get_incident_feed_in_bounds`
+- `get_incident_feed_detail`
+- `get_reporter_incident_votes`
+
+The latest feed is cached for 15 seconds when the request does not need
+per-device vote enrichment.
+
+## Current read model behavior
+
+The incident layer is already structured as a read model rather than a direct
+table dump.
+
+Current behavior includes:
+
+- map and home feeds reading pre-shaped incident results
+- detail pages reading a single incident feed record by `incident_id`
+- optional vote enrichment tied to the reporter device hash
+- bounds-based reads for the map experience
+
+## Main tables behind the flow
+
+- `incidents`
+- `incident_types`
+- `incident_categories`
+- `incident_reports`
+- `incident_verifications`
+- `incident_report_media`
+
+## Documentation rule
+
+Incident docs should keep describing the public read contract, not the internal
+processing internals. That matches the existing repo notes that warn against
+exposing internal cluster and metrics tables directly.

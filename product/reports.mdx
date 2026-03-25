@@ -1,0 +1,86 @@
+---
+title: "Reports"
+description: "Incident report intake and the current write-side workflow"
+---
+
+## Current product surfaces
+
+The main reporting surfaces currently live in the `tibs` web app:
+
+- `/report`
+- `/vehicles/[publicCode]/report`
+- `POST /api/report-incident`
+
+## Current implementation in code
+
+Incident intake is handled by `apps/web/app/api/report-incident/route.ts`.
+
+The handler currently:
+
+1. validates `issueCode`
+2. requires current latitude and longitude
+3. resolves service-area access with `resolveMvpCoverageForCoordinates`
+4. resolves a plate from either a Kenyan plate or an existing public code
+5. generates or reuses a reporter device hash
+6. writes through a Supabase RPC
+7. revalidates the affected incident and vehicle pages
+
+## Accepted issue codes
+
+The current issue definitions in `report-issue-types.ts` are:
+
+- `accident`
+- `dangerous_driving`
+- `safety_concern`
+- `passenger_issue`
+- `overcrowding`
+- `road_hazard`
+- `other`
+
+Vehicle linkage is required for the first five categories. `road_hazard` and
+`other` can be submitted without a confirmed vehicle.
+
+## Current payload shape
+
+The report payload currently accepts:
+
+- `plateNumber`
+- `issueCode`
+- `description`
+- `latitude`
+- `longitude`
+- `locationLabel`
+- `corridorName`
+- `routeName`
+- `locationAccuracyM`
+- `happenedAt`
+- `reportWithoutVehicle`
+- the optional `candidate*` fields used when a nearby vehicle is suggested but
+  not confirmed
+
+## Supabase contract
+
+The current write path uses one of two RPCs:
+
+- `submit_incident_report`
+- `submit_incident_report_without_vehicle`
+
+Those writes feed the incident-side read models rather than the public UI
+reading raw intake rows directly.
+
+## Main tables behind the flow
+
+- `incident_reports`
+- `incident_report_media`
+- `incidents`
+- `incident_types`
+- `vehicles`
+- `routes`
+- `saccos`
+- `media_uploads`
+
+## Boundary to protect
+
+Reports are the raw intake path. Public product pages should keep reading from
+read-optimized incident feeds and summaries, not directly from write-side
+processing tables.
