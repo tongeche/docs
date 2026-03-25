@@ -1,0 +1,82 @@
+---
+title: "Live interfaces"
+description: "What is actually implemented today across tibs, tibs-survey, and tibs-learning-center"
+---
+
+## Current reality
+
+TIBS does not currently expose one unified public API service.
+
+The live integration surface is split across:
+
+- Next.js route handlers in `tibs`
+- Next.js route handlers in `tibs-survey`
+- route handlers and callback routes in `tibs-learning-center`
+- direct browser or server calls to Supabase RPCs and tables
+
+## Interface classes
+
+| Interface class | Where it appears | Current access model |
+| --- | --- | --- |
+| Public and device-scoped | `tibs` public route handlers | no account required, but device hash and service-area checks may apply |
+| Signed-in user | selected `tibs` and `tibs-learning-center` routes | shared Supabase user session required |
+| Project-authenticated | `tibs-survey` catalog and user workflow routes | signed-in project session required |
+| Fieldwork-authenticated | `tibs-survey` session, assignment, and submission routes | active surveyor access required |
+| Admin-only | `tibs-survey` admin routes | internal admin access required |
+| Webhook-secret | `tibs-survey` webhook route | request must carry the configured webhook secret |
+
+## Repo-by-repo split
+
+### `tibs`
+
+The main rider app exposes public-facing route handlers for:
+
+- incident feeds
+- vehicle lookup
+- map search and corridor map data
+- coverage overlays
+- location context
+- report submission
+- QR scan
+- quick rating
+- incident voting
+
+### `tibs-survey`
+
+The operations app exposes restricted routes for:
+
+- session start, touch, and end
+- assignment claim and release
+- vehicle collection submissions
+- catalogs for corridors, routes, saccos, and vehicle lookup
+- surveyor profile and payout settings
+- expenses and withdrawal requests
+- admin review and configuration
+- Brevo webhook ingestion
+
+### `tibs-learning-center`
+
+The learning-center repo currently does **not** expose a normal `app/api`
+directory.
+
+Its live interface layer is instead:
+
+- auth callback bootstrap and finalize routes
+- sign-in, sign-up, recovery, and sign-out routes
+- browser-side Supabase reads and writes for learning progress
+- RPC `mark_learning_module_progress`
+
+## Documentation rule
+
+When writing API docs for TIBS, distinguish clearly between:
+
+- live app routes that already exist
+- internal Supabase RPCs used behind those routes
+- future external API shapes that are not yet formalized
+
+## Next pages
+
+- [Public app routes](/api-reference/public-app-routes)
+- [Restricted operations routes](/api-reference/restricted-operations-routes)
+- [Learning and auth](/api-reference/learning-and-auth)
+- [Future public API draft](/api-reference/future-public-api)

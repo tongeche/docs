@@ -1,109 +1,99 @@
 ---
-title: "Development"
-description: "Run, maintain, and expand the TIBS documentation site"
+title: "Platform development"
+description: "How TIBS development is organized across the main platform, operations, and learning services"
 ---
 
 <Info>
-  **Prerequisites**:
-  - Node.js version 19 or higher
-  - A docs repository with a `docs.json` file
-  - Access to the source repositories you want documented
+  This page is for developers, technical partners, and teams working on TIBS
+  services.
 </Info>
 
-Use this page when you are maintaining the TIBS docs site itself.
+## Development scope
 
-<Steps>
-  <Step title="Install the Mintlify CLI">
+TIBS development is currently organized across three connected application
+surfaces:
 
-```bash
-npm i -g mint
-```
+- the main rider platform
+- the survey and operations platform
+- the learning platform
 
-  </Step>
+These services are related, but they do not all serve the same audience or use
+case.
 
-  <Step title="Preview locally">
+## Main development areas
 
-Navigate to the repo root where `docs.json` is located, then run:
+### Main platform
 
-```bash
-mint dev
-```
+The main platform supports the public rider experience, including:
 
-A local preview of the documentation will be available at
-`http://localhost:3000`.
+- incident reporting
+- vehicle lookup
+- ride feedback
+- incidents and alerts
+- corridors, routes, and transport context
 
-  </Step>
-</Steps>
+### Survey and operations
 
-## Documentation structure
+The survey and operations platform supports approved participants and internal
+operations, including:
 
-- `index.mdx`: landing page
-- `quickstart.mdx`: role-based orientation
-- `product/`: product and workflow documentation
-- `legal/`: privacy, terms, and compliance pages
-- `api-reference/`: API overview and endpoint mapping
-- `references/`: raw working material and internal source notes
+- surveyor sessions
+- assignments
+- vehicle data collection
+- project workflows
+- payouts and operational administration
 
-## Working rules
+### Learning
 
-- Derive technical facts from the selected product repositories.
-- Do not leave Mintlify starter copy in published pages.
-- Do not invent legal language, compliance claims, or retention policies.
-- Mark draft legal pages clearly until approved text is available.
-- Prefer one source of truth per topic, then link to it from adjacent pages.
+The learning platform supports:
 
-## Validation
+- onboarding
+- guided learning content
+- assessments
+- role-based readiness and progress
 
-Validate link integrity before pushing:
+## Shared platform model
 
-```bash
-mint broken-links
-```
+Although these areas are separate, they are designed to work together.
 
-## Repository-driven documentation
+Current shared assumptions include:
 
-This docs site is intended to document multiple TIBS repositories from a single
-Mintlify instance. The expected flow is:
+- one connected TIBS identity across services
+- linked product, survey, and learning experiences
+- shared transport context across rider and operations workflows
 
-1. Confirm the source repositories.
-2. Read each repo for setup, architecture, interfaces, and operational rules.
-3. Publish stable docs here instead of scattering them across READMEs.
-4. Keep repo-specific implementation details linked back to the correct source.
+At the same time, public, participant-only, and administrator-only experiences
+remain separate.
 
-## Custom ports
+## Local development approach
 
-By default, Mintlify uses port 3000. You can choose another port:
+Teams working on TIBS commonly need to run multiple services together during
+development.
 
-```bash
-mint dev --port 3333
-```
+A practical local setup is:
 
-If port 3000 is already busy, Mintlify will try the next available port.
+- main platform on one local origin
+- survey platform on a second local origin
+- learning platform on a third local origin
 
-## Updating the CLI
+This separation matters because sign-in state is shared at the identity level,
+but each service still needs to establish its own session on its own origin.
 
-If your preview behaves differently from production, update the CLI:
+## Development priorities
 
-```bash
-npm update -g mint
-```
+Current development work across TIBS generally falls into these areas:
 
-## Troubleshooting
+- product experience and rider trust
+- transport data quality
+- survey and operational workflows
+- learning and readiness flows
+- legal, privacy, and policy alignment
+- future external integration surfaces
 
-<AccordionGroup>
-  <Accordion title='Error: Could not load the "sharp" module'>
+## Related sections
 
-This may be due to an outdated version of Node. Try the following:
+If you are looking for more specific technical material, continue to:
 
-1. Remove the currently installed version of the CLI: `npm remove -g mint`
-2. Upgrade to Node v19 or higher.
-3. Reinstall the CLI: `npm i -g mint`
-
-  </Accordion>
-
-  <Accordion title="Issue: Encountering an unknown error">
-
-Solution: Delete the `~/.mintlify` folder, then run `mint dev` again.
-
-  </Accordion>
-</AccordionGroup>
+- [Repositories](/repositories)
+- [Shared auth](/repositories/shared-auth)
+- [API introduction](/api-reference/introduction)

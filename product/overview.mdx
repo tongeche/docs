@@ -1,60 +1,47 @@
 ---
 title: "Product overview"
-description: "High-level map of the TIBS product surface"
+description: "High-level map of the TIBS product experience"
 ---
 
-## Current domain map
-
-The current product structure is based on the endpoint and table mapping in
-`references/tibs_ref.md`.
+## Main product areas
 
 <CardGroup cols={2}>
   <Card title="Reports" href="/product/reports">
-    Capture field reports, media, and reporter location samples.
+    Share safety and service observations from public transport trips.
   </Card>
   <Card title="Incidents" href="/product/incidents">
-    Read public incident feeds, nearby incidents, and incident detail.
+    Follow incident updates, nearby alerts, and incident detail.
   </Card>
   <Card title="Vehicles" href="/product/vehicles">
-    Look up public vehicle profiles, routes, and incident history.
+    Look up a vehicle, review recent signals, and understand its profile.
   </Card>
   <Card title="Feedback" href="/product/feedback">
-    Store ride feedback and expose vehicle feedback summaries.
+    Share ride experiences and help build service-quality insight.
   </Card>
   <Card title="Search" href="/product/search">
-    Resolve mixed queries across vehicles, saccos, and routes.
+    Find vehicles, corridors, stops, stages, and related transport context.
   </Card>
   <Card title="Network" href="/product/network">
-    Work with corridors, routes, saccos, and their summaries.
+    Explore corridors, routes, and transport coverage across the network.
   </Card>
   <Card title="Surveyor" href="/product/surveyor">
-    Manage surveyor sessions, assignments, and daily stats.
+    Learn how structured fieldwork and survey participation fit into TIBS.
   </Card>
   <Card title="Learning" href="/product/learning">
-    Serve courses, modules, and learner progress.
+    Access courses, modules, and progress tracking where learning is offered.
   </Card>
 </CardGroup>
 
-## Core pattern
+## How people use TIBS
 
-The main pattern visible in the current reference notes is:
+- report concerns or service issues they observe
+- check vehicles before or after a trip
+- follow incidents and nearby alerts
+- share ride feedback
+- explore transport corridors and coverage
+- take part in survey or learning programs where available
 
-- Write raw reports and feedback first
-- Process raw records into incidents and summaries
-- Read from optimized feeds and summary tables
-- Keep restricted admin workflows separate from public-facing reads
+## Restricted areas
 
-## Current implementation ownership
-
-- `tibs` implements the main public transport safety product, including
-  reporting, incident views, vehicle lookup, maps, coverage, terms, and
-  privacy pages.
-- `tibs-survey` implements surveyor operations, assignments, project-scoped
-  dashboards, expense claims, payouts, documents, and admin review flows.
-- `tibs-learning-center` implements course discovery, lessons, assessments,
-  and learning progress.
-
-## Restricted surfaces
-
-Admin and review operations exist, but they should remain clearly marked as
-restricted or internal wherever they are documented.
+Some parts of TIBS are for approved surveyors, administrators, or project
+participants only. Public and restricted experiences are kept separate.

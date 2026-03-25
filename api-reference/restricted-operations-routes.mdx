@@ -1,0 +1,75 @@
+---
+title: "Restricted operations routes"
+description: "Live route handlers currently exposed by the tibs-survey operations application"
+---
+
+## Scope
+
+This page documents the live route handlers currently implemented in the
+`tibs-survey` repo under `app/api`.
+
+These routes are not public rider APIs. Most of them require either a project
+session, fieldwork access, or admin access.
+
+## Project-authenticated routes
+
+| Route | Method | Access | Current behavior |
+| --- | --- | --- | --- |
+| `/api/catalog/corridors` | `GET` | project-authenticated | returns corridor options for internal forms |
+| `/api/catalog/routes` | `GET` | project-authenticated | returns route options for restricted workflows |
+| `/api/catalog/saccos` | `GET` | project-authenticated | returns sacco options for restricted workflows |
+| `/api/vehicles/lookup` | `GET` | project-authenticated | looks up approved vehicles by `plate` |
+| `/api/documents/[documentKey]/accept` | `POST` | project-authenticated | records required legal-document acceptance |
+| `/api/projects/[projectSlug]/join` | `POST` | project-authenticated | joins or switches project context |
+| `/api/expenses` | `POST` | project-authenticated | submits surveyor expense claims through `submit_surveyor_expense_claim` |
+| `/api/expenses/[expenseId]/dispute` | `POST` | project-authenticated | opens a dispute on an expense review decision |
+| `/api/submissions/[submissionId]/dispute` | `POST` | project-authenticated | opens a dispute on a submission review decision |
+| `/api/withdrawal-requests` | `POST` | project-authenticated | creates a withdrawal request after payout-balance checks |
+| `/api/surveyor/payout-details` | `PATCH` | project-authenticated | updates the surveyor’s payout details |
+| `/api/surveyor/photo` | `POST`, `DELETE` | project-authenticated | manages the surveyor profile photo |
+
+## Fieldwork-authenticated routes
+
+| Route | Method | Access | Current behavior |
+| --- | --- | --- | --- |
+| `/api/session/start` | `POST` | fieldwork-authenticated | starts a surveyor session after working-window, daily-cap, assignment, and geofence checks |
+| `/api/session/touch` | `POST` | fieldwork-authenticated | keeps an active session alive and ends it if the current work state is invalid |
+| `/api/session/end` | `POST` | fieldwork-authenticated | ends an active session and validates the end location for non-admin users |
+| `/api/assignments/claim` | `POST` | fieldwork-authenticated | claims an open assignment slot after time, status, and corridor checks |
+| `/api/assignments/release` | `POST` | fieldwork-authenticated | releases an assignment and may reopen the slot |
+| `/api/submissions` | `POST` | fieldwork-authenticated | submits vehicle collection entries through `submit_vehicle_collection_entry` and triggers auto-review |
+
+## Admin and internal routes
+
+The admin surface is already broad and should be treated as internal-only.
+
+Current route families include:
+
+| Route family | Methods in use | Purpose |
+| --- | --- | --- |
+| `/api/admin/surveyors*` | `GET`, `POST`, `PATCH`, `DELETE` | manage surveyor records, status, recovery, payout details, and photos |
+| `/api/admin/assignments*` | `POST`, `PATCH` | manage route assignments |
+| `/api/admin/assignment-slots*` | `POST`, `PATCH` | manage assignment slot creation and updates |
+| `/api/admin/submissions/[submissionId]/review` | `PATCH` | review survey submissions |
+| `/api/admin/expenses/[expenseId]/review` | `PATCH` | review expense claims |
+| `/api/admin/expense-disputes/[disputeId]` | `PATCH` | resolve expense disputes |
+| `/api/admin/submission-disputes/[disputeId]` | `PATCH` | resolve submission disputes |
+| `/api/admin/withdrawal-requests/[requestId]` | `PATCH` | approve or fulfill withdrawal requests |
+| `/api/admin/payout-entries` | `POST` | write payout and finance entries |
+| `/api/admin/vehicles*` | `PATCH` | bulk or per-vehicle internal updates |
+| `/api/admin/settings/*` | `POST`, `PATCH` | internal settings for Brevo, payout rate, inactivity reminders, and expense automation |
+
+## Webhook route
+
+| Route | Method | Access | Current behavior |
+| --- | --- | --- | --- |
+| `/api/webhooks/brevo` | `POST` | webhook secret required | validates the configured Brevo secret header and records delivery events |
+
+## Important implementation notes
+
+- `requireProjectApiSession` is the common baseline for many restricted routes
+- `requireFieldworkApiSession` is used where active surveyor field access is
+  required
+- admin routes should not be documented as public integrations
+- the operations app includes many more internal routes than the future public
+  API draft and they should stay separated conceptually

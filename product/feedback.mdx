@@ -1,64 +1,43 @@
 ---
 title: "Feedback"
-description: "Ride feedback intake, evidence uploads, and sentiment summaries"
+description: "How ride feedback works in TIBS"
 ---
 
-## Current product surfaces
+## What feedback is for
 
-Ride feedback currently flows through the `tibs` app:
+Ride feedback helps TIBS understand how transport experiences feel from the
+passenger point of view.
 
-- `/rate`
-- `/vehicles/[publicCode]/rate`
-- `POST /rate/submit`
+It supports:
 
-## Current implementation in code
+- service-quality visibility
+- vehicle-level summaries
+- recurring issue detection
+- better rider awareness over time
 
-Feedback submission is handled by `apps/web/app/rate/submit/route.ts`.
+## What users can submit
 
-The handler currently:
+Feedback may include:
 
-1. validates the plate and chosen sentiment
-2. resolves write access through `resolveMvpCoverageForDevice`
-3. generates or reuses a reporter device hash
-4. uploads optional evidence
-5. submits the feedback through Supabase
-6. revalidates the affected vehicle and rate pages
+- an overall ride sentiment
+- selected issue or experience tags
+- an optional written comment
+- an optional photo where supported
 
-## Evidence upload rules
+## How feedback appears
 
-Optional photo evidence is managed in `ride-feedback-submission.ts`.
+Individual feedback contributes to broader summaries such as:
 
-The current upload rules are:
+- overall sentiment
+- common themes
+- recent rider concerns
 
-- storage bucket: `ride-evidence`
-- allowed MIME types: `image/jpeg`, `image/png`, `image/webp`
-- maximum size: 5 MB
-- uploaded files also create rows in `media_uploads`
+These summaries help people quickly understand the kind of experience other
+users are reporting.
 
-## Supabase contract
+## Good feedback rules
 
-The write path currently uses:
-
-- `submit_ride_feedback`
-
-Vehicle feedback summaries are then read back through the vehicle detail
-functions, especially:
-
-- `get_vehicle_feedback`
-- `get_vehicle_feedback_sentiment_counts`
-- `get_vehicle_feedback_sentiment_counts_bulk`
-
-## Main tables behind the flow
-
-- `ride_feedback`
-- `ride_feedback_tag_links`
-- `ride_feedback_media`
-- `feedback_sentiments`
-- `feedback_tags`
-- `media_uploads`
-
-## Boundary to protect
-
-Feedback is another write path. Public product docs should center on the
-vehicle-level summary and sentiment outputs rather than exposing raw internal
-moderation or upload-processing details as a public contract.
+- describe the actual ride experience
+- keep comments relevant and respectful
+- avoid sharing unnecessary personal information
+- only upload images that relate directly to the ride or issue being reported

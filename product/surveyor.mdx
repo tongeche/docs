@@ -1,82 +1,35 @@
 ---
 title: "Surveyor"
-description: "Surveyor sessions, assignments, legal gating, and collection submissions"
+description: "How survey participation works in TIBS"
 ---
 
-## Owning repo
+## Who this is for
 
-The surveyor workflow is implemented in `tibs-survey`, not the main public
-`tibs` app.
+The surveyor section is for approved participants involved in structured field
+data collection programs.
 
-## Current product surfaces
+It is not part of the general public rider experience.
 
-The active surveyor product currently includes pages such as:
+## What surveyors do
 
-- `/dashboard`
-- `/assignments`
-- `/survey/new`
-- `/survey/history`
-- `/survey/[submissionId]`
-- project-scoped routes under `/projects/[projectSlug]/...`
+Depending on the project, surveyors may:
 
-The operational APIs currently include:
+- start and end assigned field sessions
+- work within specific corridors or assignments
+- record vehicle and transport observations
+- review their own activity history
+- manage expenses or payout details where applicable
 
-- `POST /api/session/start`
-- `POST /api/session/touch`
-- `POST /api/session/end`
-- `POST /api/assignments/claim`
-- `POST /api/submissions`
-- `POST /api/documents/[documentKey]/accept`
+## Access and participation
 
-## Current implementation in code
+Survey participation is controlled. Access may depend on:
 
-The surveyor workflow is guarded tightly before fieldwork can start.
+- invitation or approval
+- project assignment
+- required documents or acceptance steps
+- active participation status
 
-Current checks in the repo include:
+## Why this matters to TIBS
 
-- active surveyor account required
-- project access required
-- required legal documents tracked through `user_document_acceptances`
-- work-window enforcement between `08:00` and `18:00`
-- daily-cap enforcement
-- route assignment enforcement
-- corridor geofence checks on start, submit, and end
-- stale session cleanup when a previous session is from another Nairobi day
-
-## Supabase RPCs in use
-
-The current surveyor workflow relies on:
-
-- `start_surveyor_session`
-- `touch_surveyor_session`
-- `end_surveyor_session`
-- `submit_vehicle_collection_entry`
-- `claim_assignment_slot`
-- `get_my_surveyor_daily_work_summaries`
-
-## Main tables behind the flow
-
-- `surveyors`
-- `surveyor_sessions`
-- `surveyor_route_assignments`
-- `assignment_slots`
-- `vehicle_collection_submissions`
-- `user_document_acceptances`
-- `surveyor_finance_entries`
-- `surveyor_withdrawal_requests`
-
-## Submission flow
-
-Survey submissions currently:
-
-- validate payloads with schema checks
-- confirm the surveyor has an active route-aligned session
-- force corridor and route linkage from the current assignment
-- write through `submit_vehicle_collection_entry`
-- run the repo’s auto-review logic after save
-
-## Documentation rule
-
-Surveyor docs should treat this as an operational workflow, not just a list of
-tables. The important contract is the set of fieldwork rules a surveyor must
-pass before a session, assignment claim, or submission is accepted.
+Surveyor activity helps strengthen the quality and coverage of transport data
+used across TIBS services.

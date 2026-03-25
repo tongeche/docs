@@ -1,45 +1,27 @@
 ---
 title: "Search"
-description: "Current vehicle and map search surfaces across the TIBS apps"
+description: "How search helps people move through TIBS"
 ---
 
-## Important current-state note
+## What can be searched
 
-There is not yet a single standalone `/search` product surface in the main web
-app.
+TIBS search helps people find:
 
-Today, search is split across two implemented APIs and several UI entry points.
+- vehicles by plate or public code
+- corridors
+- stops and stages
+- related transport context
 
-## Current search surfaces
+## Where search is used
 
-- vehicle lookup through `GET /api/vehicle-lookup?q=`
-- map search through `GET /api/map-search?q=`
-- homepage and vehicles hub flows that call `searchVehicleProfiles`
+Search supports several common tasks:
 
-## Vehicle search
+- checking a vehicle before boarding
+- moving from a vehicle search into reports or feedback
+- exploring map locations
+- finding the right corridor or stop more quickly
 
-Vehicle search currently:
+## Why search matters
 
-- normalizes the query into an alphanumeric uppercase lookup
-- requires at least 2 characters
-- reads through `search_vehicle_profiles`
-- returns a best-match vehicle plus ranked suggestions
-
-The rider-facing vehicle response already includes public code, plate, route,
-origin, destination, safety score, and risk level.
-
-## Map search
-
-Map search currently:
-
-- searches `corridors`
-- searches `corridor_points_of_interest`
-- matches bus stops and stages
-- scores results using exact, prefix, token, and contains matching
-- returns location-ready results for map focus and corridor exploration
-
-## Documentation implication
-
-The draft `GET /search` endpoint in the API docs should be treated as a future
-unified contract. The live implementation today is split between vehicle lookup
-and map search.
+The platform is designed for quick decision-making. Search reduces the time it
+takes to go from uncertainty to a useful vehicle, location, or route context.

@@ -1,60 +1,57 @@
 ---
-title: "Repositories"
-description: "Source repositories that feed this documentation site"
+title: "Platform services"
+description: "How the main TIBS services fit together"
 ---
 
 <Note>
-  This page is the control point for the multi-repo TIBS docs setup. The three
-  source repos are now confirmed.
+  TIBS is delivered through a small set of connected services. This page shows
+  how they relate and where to go next.
 </Note>
 
-## What belongs here
-
-This docs site is meant to consolidate stable documentation that would
-otherwise be scattered across multiple code repositories.
-
-Typical repo-derived content includes:
-
-- Setup and environment requirements
-- Architecture and service boundaries
-- API contracts and integration notes
-- Operational workflows
-- Release or deployment guidance
-
-## Confirmed repos
+## Main services
 
 <CardGroup cols={2}>
-  <Card title="tibs" href="/repositories/tibs">
-    Main transport safety platform, data model, and public product surfaces.
+  <Card title="TIBS" href="/repositories/tibs">
+    The main public experience for reporting, incidents, vehicle checks, and
+    ride feedback.
   </Card>
-  <Card title="tibs-survey" href="/repositories/tibs-survey">
-    Invite-only surveyor, assignments, payouts, and project operations app.
+  <Card title="Survey operations" href="/repositories/tibs-survey">
+    The service used for approved survey, assignment, and fieldwork programs.
   </Card>
-  <Card title="tibs-learning-center" href="/repositories/tibs-learning-center">
-    Standalone learning surface with courses, assessments, and progress.
+  <Card title="Learning center" href="/repositories/tibs-learning-center">
+    The service used for courses, readiness guidance, and learning progress.
   </Card>
-  <Card title="Shared auth" href="/repositories/shared-auth">
-    How the three apps share Supabase identity without sharing cookies.
+  <Card title="Shared sign-in" href="/repositories/shared-auth">
+    How access works across connected TIBS services.
   </Card>
 </CardGroup>
 
-## How these repos relate
+## How the services fit together
 
-- `tibs` owns the main public product experience and most transport safety
-  workflows.
-- `tibs-survey` handles field operations, surveyor workflows, documents,
-  projects, expenses, and payout flows.
-- `tibs-learning-center` delivers course content, assessments, and learner
-  progress.
-- All three apps are designed to share the same Supabase project and auth user
-  identities.
+- the main TIBS service supports the public rider experience
+- the survey service supports approved participants and operational programs
+- the learning center supports onboarding and guided learning
+- the services are connected, but they do not all serve the same audience
 
-## Documentation approach
+## Public and restricted areas
 
-Each repo page should capture:
+Some parts of TIBS are open to the public, while others are limited to approved
+participants or administrators.
 
-1. Purpose
-2. Setup and environment
-3. Current route and feature surface
-4. Deployment entrypoints
-5. Source documents that should be pulled into this docs site
+This separation helps TIBS keep:
+
+- public transport information easy to access
+- operational workflows controlled
+- learning experiences targeted to the right audience
+
+## Service addresses
+
+- `tibs`: `https://tibs.tisabs.com`
+- `tibs-survey`: `https://vdc.tisabs.com`
+- `tibs-learning-center`: `https://tibs-learning-center.netlify.app`
+
+## For technical readers
+
+If you need setup, environment, or integration detail, continue to the
+service-specific pages linked above or move to the [API introduction](/api-reference/introduction)
+and [Platform development](/development) sections.

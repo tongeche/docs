@@ -1,0 +1,50 @@
+---
+title: "Future public API draft"
+description: "How to interpret the draft openapi.json file in this docs repo"
+---
+
+## What this file is
+
+The `api-reference/openapi.json` file in this docs repo is a **future public API
+draft**.
+
+It is useful for shaping a cleaner external contract across reports, incidents,
+vehicles, feedback, surveyor workflows, and learning workflows.
+
+## What this file is not
+
+It is **not** the current production route inventory.
+
+The live interfaces today are still split across:
+
+- `tibs` route handlers
+- `tibs-survey` restricted route handlers
+- `tibs-learning-center` auth callbacks and Supabase usage
+
+Use these pages for the current implementation:
+
+- [Live interfaces](/api-reference/live-interfaces)
+- [Public app routes](/api-reference/public-app-routes)
+- [Restricted operations routes](/api-reference/restricted-operations-routes)
+- [Learning and auth](/api-reference/learning-and-auth)
+
+## Current gaps before this becomes real
+
+The draft OpenAPI file still needs:
+
+- a real production server URL
+- a final auth model
+- stable request and response envelopes
+- error formats and status conventions
+- examples that match live behavior
+- a decision on which internal routes stay internal and which become public
+
+## Recommended use
+
+Use the OpenAPI draft when:
+
+- designing a cleaner external API surface
+- reviewing naming consistency across domains
+- planning a future dedicated API origin
+
+Do not use it as the only source of truth for current implementation behavior.

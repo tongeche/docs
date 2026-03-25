@@ -1,75 +1,32 @@
 ---
 title: "Vehicles"
-description: "Vehicle lookup, profile views, QR scan, and linked history"
+description: "Vehicle lookup, profile information, and recent history"
 ---
 
-## Current product surfaces
+## What vehicle pages are for
 
-The current vehicle experience in `tibs` is spread across:
+TIBS vehicle pages help riders look up a vehicle before boarding or review a
+vehicle after an experience.
 
-- `/vehicles`
-- `/vehicles/[publicCode]`
-- `/scan`
-- `GET /api/vehicle-lookup?q=`
+## What a vehicle profile can show
 
-## Current implementation in code
+A vehicle profile may include:
 
-Vehicle discovery and detail loading currently live in
-`apps/web/src/lib/vehicles.ts`.
+- public code or plate reference
+- route and corridor context
+- operator or sacco context
+- recent incident signals
+- recent ride feedback
+- general safety or service summaries
 
-The main entry points are:
+## How riders use this section
 
-- `searchVehicleProfiles`
-- `getVehicleDetail`
-- `getVehicleFeedbackSentimentCountsBulk`
-- `scanVehicleQr`
+- check a vehicle before boarding
+- review recent concerns tied to a vehicle
+- understand route and operator context
+- share feedback after a trip
 
-## Supabase RPCs in use
+## Important note
 
-The vehicle layer currently depends on:
-
-- `search_vehicle_profiles`
-- `get_vehicle_profile`
-- `get_vehicle_feedback`
-- `get_vehicle_feedback_sentiment_counts`
-- `get_vehicle_feedback_sentiment_counts_bulk`
-- `get_vehicle_incidents`
-- `scan_vehicle_qr`
-
-## Current response shape
-
-The vehicle lookup route already returns a rider-facing shape with:
-
-- `publicCode`
-- `plateNumber`
-- `routeName`
-- `originName`
-- `destinationName`
-- `safetyScore`
-- `riskLevel`
-
-The detail page then combines profile, recent feedback, sentiment counts, and
-incident history into one view model.
-
-## Lookup behavior
-
-Current lookup logic supports:
-
-- exact or partial search by plate
-- exact or partial search by public code
-- QR scan entry through `scan_vehicle_qr`
-- redirect and revalidation hooks after report and feedback submission
-
-## Main tables behind the flow
-
-- `vehicles`
-- `vehicle_saccos`
-- `vehicle_routes`
-- `ride_feedback`
-- `incidents`
-
-## Documentation goal
-
-This section should describe the stable rider-facing vehicle contract: how a
-vehicle is identified, which safety fields are public, and how linked incident
-and feedback summaries are produced.
+Vehicle profiles on TIBS are informational. They bring together community and
+platform signals, but they are not official operator records.

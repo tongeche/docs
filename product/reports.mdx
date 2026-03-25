@@ -1,86 +1,51 @@
 ---
 title: "Reports"
-description: "Incident report intake and the current write-side workflow"
+description: "How riders and contributors submit incident and service reports"
 ---
 
-## Current product surfaces
+## What reporting is for
 
-The main reporting surfaces currently live in the `tibs` web app:
+TIBS reporting lets users share safety and service concerns they observe in
+public transport.
 
-- `/report`
-- `/vehicles/[publicCode]/report`
-- `POST /api/report-incident`
+Reports help support:
 
-## Current implementation in code
+- commuter awareness
+- transport safety visibility
+- route and corridor insight
+- follow-up review within the platform
 
-Incident intake is handled by `apps/web/app/api/report-incident/route.ts`.
+## What a report can include
 
-The handler currently:
+Depending on the situation, a report may include:
 
-1. validates `issueCode`
-2. requires current latitude and longitude
-3. resolves service-area access with `resolveMvpCoverageForCoordinates`
-4. resolves a plate from either a Kenyan plate or an existing public code
-5. generates or reuses a reporter device hash
-6. writes through a Supabase RPC
-7. revalidates the affected incident and vehicle pages
+- a vehicle plate or public vehicle code
+- the type of issue being reported
+- the time and approximate location
+- route or corridor context
+- optional notes or extra detail
 
-## Accepted issue codes
+Some reports can be submitted without a confirmed vehicle when the issue is
+about the road or surrounding conditions rather than a specific matatu.
 
-The current issue definitions in `report-issue-types.ts` are:
+## What happens after submission
 
-- `accident`
-- `dangerous_driving`
-- `safety_concern`
-- `passenger_issue`
-- `overcrowding`
-- `road_hazard`
-- `other`
+After a report is submitted, it may be used to:
 
-Vehicle linkage is required for the first five categories. `road_hazard` and
-`other` can be submitted without a confirmed vehicle.
+- support incident summaries
+- appear in vehicle and corridor context
+- contribute to wider transport-safety visibility
+- support moderation and review within TIBS
 
-## Current payload shape
+## Good reporting rules
 
-The report payload currently accepts:
+- report what you personally observed
+- keep details accurate and relevant
+- avoid personal attacks or abusive language
+- do not include unnecessary personal information
 
-- `plateNumber`
-- `issueCode`
-- `description`
-- `latitude`
-- `longitude`
-- `locationLabel`
-- `corridorName`
-- `routeName`
-- `locationAccuracyM`
-- `happenedAt`
-- `reportWithoutVehicle`
-- the optional `candidate*` fields used when a nearby vehicle is suggested but
-  not confirmed
+## Important limitation
 
-## Supabase contract
-
-The current write path uses one of two RPCs:
-
-- `submit_incident_report`
-- `submit_incident_report_without_vehicle`
-
-Those writes feed the incident-side read models rather than the public UI
-reading raw intake rows directly.
-
-## Main tables behind the flow
-
-- `incident_reports`
-- `incident_report_media`
-- `incidents`
-- `incident_types`
-- `vehicles`
-- `routes`
-- `saccos`
-- `media_uploads`
-
-## Boundary to protect
-
-Reports are the raw intake path. Public product pages should keep reading from
-read-optimized incident feeds and summaries, not directly from write-side
-processing tables.
+Submitting a report through TIBS does not make it an official legal finding or
+government record. TIBS is an information platform and reports may still be
+reviewed, updated, or limited in visibility.

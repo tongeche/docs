@@ -1,68 +1,37 @@
 ---
 title: "Learning"
-description: "Learning courses, modules, readiness tracking, and progress state"
+description: "Courses, modules, and learning progress in TIBS"
 ---
 
-## Owning repo
+## What the learning section offers
 
-The learning product is implemented in `tibs-learning-center`.
+The learning experience helps people move through guided material such as:
 
-## Current product surfaces
+- courses
+- modules
+- lessons
+- assessments
+- progress tracking
 
-The current learning center includes:
+## How learning is used
 
-- `/`
-- `/courses/[slug]`
-- `/courses/[slug]/assessments/[assessmentId]`
-- `/learn/[slug]`
-- `/account`
+Learning content may be used for:
 
-## Current implementation in code
+- onboarding
+- readiness guidance
+- skills development
+- role-specific training
 
-Progress is currently handled in
-`apps/web/src/lib/learning-progress-client.ts`.
+## Progress and completion
 
-The learning client:
+Where learning is offered, users may be able to:
 
-- reads a signed-in user’s module progress from `learning_module_progress`
-- updates progress through `mark_learning_module_progress`
-- relies on shared Supabase auth with the other TIBS apps
+- continue from where they left off
+- track completed modules
+- complete assessments
+- work toward readiness or completion milestones
 
-## Current schema model
+## Access
 
-The main learning schema currently includes:
-
-- `learning_courses`
-- `learning_modules`
-- `learning_course_enrollments`
-- `learning_module_progress`
-
-Important current fields already present in the schema include:
-
-- course `audience` as `surveyors` or `public`
-- `is_active`
-- `readiness_enabled`
-- module `required_for_readiness`
-- module `estimated_minutes`
-
-## Current access model
-
-The learning migration already enables row-level security with this shape:
-
-- active courses and modules are publicly readable
-- authenticated users can read their own enrollments and progress
-- authenticated users can insert and update their own enrollments and progress
-
-## Supabase contract
-
-The current write-side learning action uses:
-
-- `mark_learning_module_progress`
-
-That RPC is responsible for upserting enrollment and module-progress state and
-for computing completion and readiness updates.
-
-## Documentation goal
-
-This section should explain how public learning content, surveyor readiness, and
-shared-auth state fit together. The codebase already supports all three.
+Some learning content may be public, while other content may be limited to
+specific participants or programs.

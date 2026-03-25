@@ -1,0 +1,76 @@
+---
+title: "Learning and auth"
+description: "Current learning-center integration surface and cross-app auth behavior"
+---
+
+## Important current-state note
+
+The `tibs-learning-center` repo does not currently expose a conventional
+`app/api` directory.
+
+That means the learning product should not yet be documented as if it had
+standalone HTTP endpoints for course and progress operations.
+
+## Current live integration surface
+
+The real learning-center interface currently consists of:
+
+- auth callback routes
+- sign-in, sign-up, sign-out, and recovery routes
+- browser-side Supabase reads and writes
+- learning progress RPC usage
+
+## Callback flow
+
+The current shared-auth handover depends on these learning-center routes:
+
+| Route | Method | Role |
+| --- | --- | --- |
+| `/auth/callback` | page | browser bootstrap point for auth payloads such as `code`, `token_hash`, and session hash values |
+| `/auth/callback/finalize` | `GET` | reads the destination-origin session, syncs the signed-in user, and redirects to the final page |
+
+The current handover model is browser-first:
+
+- the source app generates the one-time auth link
+- Supabase redirects into the destination callback
+- the destination app establishes its own session on its own origin
+- the finalize route completes sync and redirect
+
+## Other auth routes
+
+The learning-center auth surface also includes:
+
+- `/auth/sign-in`
+- `/auth/sign-up`
+- `/auth/sign-out`
+- `/auth/recover`
+- `/auth/recover/request`
+- `/auth/recover/submit`
+- `/auth/preferences/locale`
+
+## Learning progress interface
+
+Learning progress is currently not exposed through a dedicated HTTP route.
+
+Instead, the app:
+
+- reads from `learning_module_progress`
+- writes through RPC `mark_learning_module_progress`
+- relies on shared Supabase auth
+- depends on row-level security so users only read and update their own
+  enrollment and progress rows
+
+## Documentation rule
+
+Do not invent endpoints such as:
+
+- `GET /api/learning/progress`
+- `POST /api/learning/progress`
+
+until those routes actually exist in the repo.
+
+The live contract today is:
+
+- auth callback routes plus browser session bootstrap
+- client-side Supabase reads and writes
+- learning progress RPCs behind authenticated RLS policies

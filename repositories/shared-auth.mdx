@@ -1,55 +1,54 @@
 ---
-title: "Shared auth"
-description: "Cross-app authentication model across tibs, tibs-survey, and tibs-learning-center"
+title: "Shared sign-in"
+description: "How access works across connected TIBS services"
 ---
 
-## Goal
+## One TIBS account across services
 
-The three TIBS apps are designed to use:
+TIBS is designed so that the same account can be used across connected
+services.
 
-- the same Supabase project
-- the same `auth.users` identities
-- the same email and password per person
+That means a person should not need separate credentials for:
 
-Users should not need separate accounts for the main app, survey app, and
-learning center.
+- the main TIBS service
+- the survey and operations service
+- the learning center
 
-## Important rule
+## What to expect
 
-Shared identity does not mean shared cookies.
+Even with one shared account, different services may still ask you to confirm
+access separately when moving between them.
 
-Each origin must create its own session on its own domain. Do not copy browser
-cookies between apps.
+This helps each service protect the right experience for the right audience.
 
-## Current model
+## Why access can feel different
 
-The current handoff model documented in `tibs-survey/handover.md` is:
+Not every service is open to every user.
 
-1. The user authenticates against the shared Supabase project.
-2. The source app creates a normal session on its own origin.
-3. The source app generates a one-time auth link for the same user.
-4. Supabase redirects the browser into the destination app callback.
-5. The destination app establishes its own session on its own origin.
-6. The destination app redirects to the requested next page.
+- the main TIBS service is the public-facing experience
+- the survey service is limited to approved participants and administrators
+- the learning center may contain public or program-specific access
 
-## Apps involved
+Because of that, signing in successfully does not always mean access to every
+service or every page.
 
-- main app: `tibs.tisabs.com`
-- survey app: `vdc.tisabs.com`
-- learning center: `tibs-learning-center.netlify.app`
+## Service addresses
 
-## Why this matters in docs
+- main TIBS: `https://tibs.tisabs.com`
+- survey operations: `https://vdc.tisabs.com`
+- learning center: `https://tibs-learning-center.netlify.app`
 
-This shared-auth model affects:
+## If access does not work as expected
 
-- sign-in guidance
-- redirect and callback docs
-- environment variable docs
-- hosted-origin configuration
-- cross-app navigation expectations
+Check:
 
-## Primary source
+- whether you are using the correct TIBS account
+- whether the service or program requires approval
+- whether you have completed any required steps for that service
 
-The strongest current source note is `tibs-survey/handover.md`, which records
-the shared-auth model across the three repos and the browser-first callback
-pattern used by the learning center.
+## Looking for technical detail?
+
+For developer and integration material, continue to:
+
+- [Platform development](/development)
+- [API introduction](/api-reference/introduction)

@@ -4,31 +4,31 @@ description: "Current API reference entry point for TIBS"
 ---
 
 <Note>
-  The starter OpenAPI sample has not been adopted for TIBS. The current
-  reference baseline is the endpoint-to-table mapping in `references/tibs_ref.md`
-  plus the product pages in this site.
+  The current TIBS API section now distinguishes between:
+  1. live app interfaces already implemented in the repos
+  2. a future public API contract draft in `openapi.json`
 </Note>
 
 ## What this section covers
 
-This API section is currently organized around the real TIBS domains already
-visible in the reference notes:
+This section is organized around the real code already present in the confirmed
+repos:
 
-- Reports
-- Incidents
-- Vehicles
-- Feedback
-- Search
-- Corridors, routes, and saccos
-- Surveyor workflows
-- Learning workflows
-- Restricted admin flows
+- `tibs` live route handlers under `apps/web/app/api`
+- `tibs-survey` restricted route handlers under `app/api`
+- `tibs-learning-center` auth callback routes plus browser-side Supabase RPC
+  usage
+- a future external API draft kept in `api-reference/openapi.json`
 
 ## Current source of truth
 
-Until the formal OpenAPI document is ready, use the [API domain map](/api-reference/domain-map)
-and the product workflow pages together. They capture intent, likely endpoint
-families, and the data surfaces behind them.
+Use these pages together:
+
+- [Live interfaces](/api-reference/live-interfaces)
+- [Public app routes](/api-reference/public-app-routes)
+- [Restricted operations routes](/api-reference/restricted-operations-routes)
+- [Learning and auth](/api-reference/learning-and-auth)
+- [API domain map](/api-reference/domain-map)
 
 The current source repos behind those surfaces are:
 
@@ -36,19 +36,30 @@ The current source repos behind those surfaces are:
 - `tibs-survey` for surveyor operations and project workflows
 - `tibs-learning-center` for course progress and learning flows
 
-## Next state
+## Future contract
 
-This section should eventually contain:
+The draft OpenAPI file is still useful, but it should be treated as a future
+public contract, not as a description of the live route handlers.
 
-1. A real OpenAPI document for the selected TIBS repositories.
-2. Authentication, error, and rate-limit rules.
-3. Request and response examples.
-4. Webhook or event documentation where applicable.
+Use [Future public API draft](/api-reference/future-public-api) when you want
+the proposed external contract shape rather than the current repo
+implementation.
 
-<Card
-  title="Browse the API domain map"
-  icon="map"
-  href="/api-reference/domain-map"
->
-  Start from the current endpoint families and workflow boundaries.
-</Card>
+<CardGroup cols={2}>
+  <Card
+    title="Live interfaces"
+    icon="route"
+    href="/api-reference/live-interfaces"
+  >
+    Start here for the route handlers and Supabase-backed interfaces that exist
+    today.
+  </Card>
+  <Card
+    title="Future public API draft"
+    icon="code"
+    href="/api-reference/future-public-api"
+  >
+    Use this when you need the proposed external contract rather than the live
+    app routes.
+  </Card>
+</CardGroup>

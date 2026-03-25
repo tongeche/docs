@@ -1,0 +1,64 @@
+---
+title: "Public app routes"
+description: "Live route handlers currently exposed by the tibs rider application"
+---
+
+## Scope
+
+This page documents the live route handlers currently implemented in the
+`tibs` repo under `apps/web/app/api`.
+
+These are real interfaces in code. They are not the same thing as the future
+external API draft in `openapi.json`.
+
+## Public read and discovery routes
+
+| Route | Method | Access | Current behavior |
+| --- | --- | --- | --- |
+| `/api/incidents` | `GET` | public, device-scoped | returns incidents for a required bbox using `south`, `west`, `north`, `east`, and optional `limit` |
+| `/api/vehicle-lookup` | `GET` | public | looks up a vehicle by `q`, returns best match plus suggestions |
+| `/api/map-search` | `GET` | public | searches corridors, bus stops, and stages for map exploration |
+| `/api/corridor-map` | `GET` | public | returns corridor geometry and points of interest by corridor or coordinate context |
+| `/api/coverage-map` | `GET` | public | returns coverage and mask GeoJSON from `get_mvp_coverage_overlay` |
+| `/api/location-context` | `GET` | public | resolves current location context from a single latitude and longitude |
+| `/api/corridors/summary` | `GET` | public | returns summary data for a required `corridorId` |
+| `/api/corridors/alerts-ahead` | `GET` | public, device-scoped | returns alerts ahead plus corridor summary using location, direction, and optional route context |
+| `/api/report-candidates` | `GET` | public | finds nearby vehicle candidates from latitude and longitude plus optional corridor and direction |
+
+## Public write and action routes
+
+| Route | Method | Access | Current behavior |
+| --- | --- | --- | --- |
+| `/api/report-incident` | `POST` | public, device-scoped | validates issue code and location, enforces service area, and writes through `submit_incident_report` or `submit_incident_report_without_vehicle` |
+| `/api/scan-vehicle` | `POST` | public, device-scoped | accepts a QR token and resolves a vehicle public code through `scan_vehicle_qr` |
+| `/api/quick-rate` | `POST` | public, device-scoped | submits fast ride feedback through `submit_ride_feedback`, enforces service area, and may return a signup nudge |
+| `/api/incidents/vote` | `POST` | public, device-scoped | records incident votes through `set_incident_vote` and returns updated counts |
+| `/api/location-context` | `POST` | public, device-scoped | accepts multiple location samples and returns resolved corridor and movement context |
+
+## Signed-in account route
+
+| Route | Method | Access | Current behavior |
+| --- | --- | --- | --- |
+| `/api/account/avatar` | `POST` | signed-in user | uploads a profile photo to `surveyor-photos`, updates auth metadata, and revalidates account surfaces |
+
+## Important implementation notes
+
+- several public write routes still rely on a reporter device hash even when no
+  account is required
+- service-area enforcement is already part of the contract for report and quick
+  feedback submission
+- these handlers are backed by Supabase RPCs, not by a standalone API server
+- some live route handlers also exist outside `/api`, such as `/rate/submit`,
+  but this page is limited to the `app/api` surface
+
+## Main RPCs behind these routes
+
+- `get_incident_feed_in_bounds`
+- `search_vehicle_profiles`
+- `resolve_corridor_for_location`
+- `get_mvp_coverage_overlay`
+- `submit_incident_report`
+- `submit_incident_report_without_vehicle`
+- `scan_vehicle_qr`
+- `submit_ride_feedback`
+- `set_incident_vote`

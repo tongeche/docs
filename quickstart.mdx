@@ -3,65 +3,64 @@ title: "Quickstart"
 description: "Choose the right path through the TIBS documentation set"
 ---
 
-## Use this documentation by role
+## Use this documentation by audience
 
-### Product and operations readers
+### Riders and general users
 
 1. Start on [TIBS documentation](/).
-2. Open [Product overview](/product/overview) to find the relevant domain.
-3. Move to [API introduction](/api-reference/introduction) if you need
-   endpoint-level guidance.
-4. Check [Legal center](/legal/index) for policy, privacy, and contractual
-   documents.
+2. Open [Product overview](/product/overview).
+3. Go to [Legal center](/legal/index) if you need privacy or policy
+   information.
 
-### API integrators
+### Surveyors and program participants
+
+1. Start with [Product overview](/product/overview).
+2. Open [Surveyor](/product/surveyor) for the fieldwork overview.
+3. Review the [Surveyor participation agreement](/legal/surveyor-participation-agreement)
+   when relevant.
+
+### Partners and integrators
 
 1. Read [API introduction](/api-reference/introduction).
-2. Use [API domain map](/api-reference/domain-map) to find the correct
-   endpoint family.
-3. Cross-check the matching product page to understand intent and boundaries.
-4. Treat the domain map as the current source of truth until the full OpenAPI
-   spec is published.
+2. Use [Live interfaces](/api-reference/live-interfaces) to understand the
+   current system.
+3. Use [Future public API draft](/api-reference/future-public-api) if you need
+   the planned external contract shape.
 
-### Legal and compliance reviewers
+### Legal and policy readers
 
 1. Start in [Legal center](/legal/index).
-2. Review the draft document structure for privacy, terms, and data
-   processing.
-3. Replace draft placeholders with approved legal text before public
-   publication.
+2. Review the privacy policy, reporting policy, and any agreement relevant to
+   your use of TIBS.
 
 ### Documentation contributors
 
-1. Install the Mintlify CLI with `npm i -g mint`.
-2. From the docs repo root, run `mint dev`.
-3. Open `http://localhost:3000` to preview the site.
-4. Run `mint broken-links` before pushing changes.
+1. Read [Development](/development).
+2. Preview changes locally.
+3. Validate links before publishing updates.
 
-## Current scope
+## What this site includes
 
-This site is being repositioned to serve three documentation jobs:
-
-- Product documentation for the TIBS platform
-- API and data-surface documentation derived from source repos
-- Legal documentation for policies, terms, and regulated disclosures
+- product guidance for TIBS services
+- legal and policy information
+- technical reference material for developers and integrators
 
 ## Next places to go
 
 <CardGroup cols={2}>
   <Card title="Product overview" href="/product/overview">
-    Start with the product domain map and workflow boundaries.
+    Start with the main TIBS experiences and workflows.
   </Card>
 
   <Card title="Legal center" href="/legal/index">
-    Centralize privacy, terms, and data-processing documents.
+    Review privacy, reporting, and related policy information.
   </Card>
 
-  <Card title="Repositories" href="/repositories">
-    Track the source repositories that will feed this docs site.
+  <Card title="API introduction" href="/api-reference/introduction">
+    Explore the current technical interfaces and integration surfaces.
   </Card>
 
-  <Card title="Contributor guide" href="/development">
-    Run the docs locally and keep content aligned with code.
+  <Card title="Development" href="/development">
+    Run the docs site and connected TIBS services locally.
   </Card>
 </CardGroup>

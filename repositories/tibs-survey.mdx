@@ -1,88 +1,65 @@
 ---
-title: "tibs-survey"
-description: "Invite-only surveyor and project operations application"
+title: "Survey operations"
+description: "Overview of the TIBS survey and operations service"
 ---
 
-## Purpose
+## What it is
 
-`tibs-survey` is a separate application for surveyor operations and project
-management. It handles invite-only access, project-scoped workflows, survey
-submissions, assignments, expense claims, payout operations, and internal admin
-review.
+The survey and operations service supports approved programs that rely on
+structured fieldwork, assignments, and operational review.
 
-## Stack
+It is not part of the general public rider experience.
 
-- Next.js 16 App Router
-- React 19
-- Tailwind CSS v4
-- pnpm
-- Supabase Auth and Postgres
-- Netlify
-- Brevo transactional email
-- M-Pesa payout integration
+## What it is used for
 
-## Current feature surface
+This service supports work such as:
 
-The current route map includes:
+- survey participation
+- field assignments
+- vehicle and route observations
+- project-based operational workflows
+- expense and payout-related processes
 
-- auth: login, signup, forgot password, invite acceptance, auth callback
-- onboarding and access control
-- dashboard and assignments
-- survey submission and survey history
-- project dashboards under `/projects/[projectSlug]`
-- expenses, payouts, invoices, and payout invoice verification
-- documents and field documents
-- admin pages for surveyors, vehicles, payouts, slots, and approvals
-- public privacy policy page
+## Main experiences
 
-## Environment and local setup
+Participants may use this service to:
 
-From the repo root:
+- sign in to approved programs
+- start and end field sessions
+- claim or release assignments
+- submit survey observations
+- manage approved workflow steps related to participation
 
-```bash
-pnpm install
-pnpm dev
-```
+Administrators may also use it to:
 
-Key env groups visible in `.env.example`:
+- review submissions
+- manage assignments
+- support participant operations
 
-- Supabase public and secret keys
-- public origin and hosted-origin overrides
-- shared learning-center URL
-- admin email allowlist
-- Brevo email configuration
-- M-Pesa payout configuration
+## Who it is for
 
-## Deployment
+This service is for:
 
-- Build command: `pnpm build`
-- Netlify config: `netlify.toml`
-- Netlify pins Node `22`
-- Scheduled Netlify functions exist for inactivity reminders and founders onboarding
+- approved surveyors
+- project participants
+- program coordinators
+- authorized administrators
 
-## Database and operations scope
+## Service address
 
-The migration set shows this repo owns or extends:
+`https://vdc.tisabs.com`
 
-- surveyor records and sessions
-- route assignments and assignment slots
-- expense automation and claims
-- surveyor finance entries and withdrawal requests
-- project and membership layers
-- document acceptance and approval flows
+## How it connects to the rest of TIBS
 
-## Legal and policy material already in repo
+The survey service connects with the wider platform by:
 
-- `docs/tibs_privacy_policy.md`
-- `docs/tibs_survey_participation_agreement.md`
-- rendered public privacy policy route at `/privacy-policy`
-- legal-document rendering and acceptance components in `components/legal`
+- supporting structured data collection
+- sharing sign-in with other TIBS services
+- linking participation requirements, legal documents, and operations workflows
 
-## Why this repo matters to this docs site
+## Looking for technical detail?
 
-This repo is the primary source for:
+For developer and integration material, continue to:
 
-- Surveyor system docs
-- Project operations docs
-- Internal/admin workflow docs
-- Surveyor legal and participation documents
+- [Platform development](/development)
+- [API introduction](/api-reference/introduction)

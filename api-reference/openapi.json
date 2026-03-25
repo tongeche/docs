@@ -1,14 +1,14 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "TIBS API",
-    "description": "Draft API skeleton derived from the current TIBS repo set and endpoint mapping notes. This is not yet the final production contract.",
-    "version": "0.2.0"
+    "title": "TIBS Future Public API Draft",
+    "description": "Draft external API skeleton derived from the current TIBS repo set and domain mapping notes. This file does not describe the live Next.js route handlers in tibs or tibs-survey; those are documented in the MDX pages under api-reference.",
+    "version": "0.3.0-draft"
   },
   "servers": [
     {
       "url": "https://api.tibs.example",
-      "description": "Placeholder API origin"
+      "description": "Placeholder origin for a future dedicated API, not a live production server"
     }
   ],
   "security": [

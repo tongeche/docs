@@ -1,92 +1,58 @@
 ---
-title: "tibs"
-description: "Main platform repository for the TIBS transport safety product"
+title: "TIBS"
+description: "Overview of the main TIBS service"
 ---
 
-## Purpose
+## What it is
 
-`tibs` is the main platform repository. It contains the public-facing transport
-safety product, the primary Supabase schema and migrations, and most of the
-transport data model reflected in the API domain map.
+TIBS is the main public service in the platform. It is where riders and general
+users interact with the core transport-safety experience.
 
-## Stack
+## What people use it for
 
-- npm workspaces
-- Next.js 16 web app
-- React 19
-- Tailwind CSS v4
-- TanStack Query
-- React Hook Form
-- Leaflet and MapLibre
-- Supabase and Postgres with PostGIS
-- Netlify
+People use TIBS to:
 
-## Workspace layout
+- report safety or service concerns
+- check a vehicle before or after a ride
+- follow incidents and nearby alerts
+- share ride feedback
+- explore corridors, routes, and transport context
 
-- `apps/web`: public web app
-- `apps/mobile`: placeholder for a future mobile client
-- `supabase`: schema, migrations, and seeds
-- `workers`: background and CrewAI tooling
-- `packages/shared`: shared contracts
-- `scripts`: data import and operational tooling
-- `data`: cached or seeded transport data
+## Main experiences
 
-## Current web surface
+The main TIBS service includes:
 
-The current route map includes:
+- reporting
+- incidents and alerts
+- vehicle lookup
+- ride feedback
+- map and corridor exploration
+- account and support pages
 
-- `/`
-- `/vehicles`
-- `/vehicles/[publicCode]`
-- `/report`
-- `/rate`
-- `/incidents/[incidentId]`
-- `/maps`
-- `/coverage/[slug]`
-- `/learn/[slug]`
-- `/privacy`
-- `/terms`
-- `/about`
-- `/support`
-- `/offline`
-- `/scan`
-- `/account`
+## Who it is for
 
-## Environment and local setup
+This service is primarily for:
 
-From the repo root:
+- riders
+- commuters
+- public users
+- partners who need the main TIBS experience
 
-```bash
-npm install
-npm run dev
-```
+## Service address
 
-Important env groups visible in `.env.example`:
+`https://tibs.tisabs.com`
 
-- Supabase project and browser-safe keys
-- Database connection strings
-- Direct Postgres connection details
-- Pooler connection details
-- CrewAI worker configuration
+## How it connects to the rest of TIBS
 
-## Deployment
+The main TIBS service connects with the wider platform by:
 
-- Root command: `npm run build`
-- Web workspace command: `npm run build:web`
-- Web deploy config lives at `apps/web/netlify.toml`
+- sharing sign-in with other connected TIBS services
+- linking into survey and learning journeys where relevant
+- using the same transport context across the platform
 
-## Why this repo matters to this docs site
+## Looking for technical detail?
 
-This repo is the main source for:
+For developer and integration material, continue to:
 
-- Product workflow docs
-- API and data-surface docs
-- Reporting policy and platform behavior docs
-- Database-facing terminology used across the other repos
-
-## Source documents worth importing
-
-- `docs/architecture.md`
-- `docs/references/reporting_policy.md`
-- `docs/references/open_apis_road_safety_platform.md`
-- `docs/references/road_safety_mvp_blueprint.md`
+- [Platform development](/development)
+- [API introduction](/api-reference/introduction)

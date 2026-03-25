@@ -90,10 +90,20 @@
         "tab": "API",
         "groups": [
           {
-            "group": "Reference map",
+            "group": "Current implementation",
             "pages": [
               "api-reference/introduction",
+              "api-reference/live-interfaces",
+              "api-reference/public-app-routes",
+              "api-reference/restricted-operations-routes",
+              "api-reference/learning-and-auth",
               "api-reference/domain-map"
+            ]
+          },
+          {
+            "group": "Future contract",
+            "pages": [
+              "api-reference/future-public-api"
             ]
           }
         ]

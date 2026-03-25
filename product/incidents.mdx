@@ -1,61 +1,39 @@
 ---
 title: "Incidents"
-description: "Incident read models, live map feeds, and incident detail"
+description: "How incident information appears across TIBS"
 ---
 
-## Current product surfaces
+## What incident views show
 
-Incident views in the `tibs` app currently show up through:
+TIBS incident views help people understand current or recent safety-related
+events across the transport network.
 
-- `/`
-- `/maps`
-- `/incidents/[incidentId]`
+Incident information may appear through:
 
-## Current implementation in code
+- map views
+- nearby alerts
+- incident detail pages
+- vehicle and corridor context
 
-The main read layer is in `apps/web/src/lib/incidents.ts`.
+## What users can expect
 
-It exposes three primary loaders:
+Incident pages are designed to show:
 
-- `getLatestIncidents`
-- `getIncidentsInBounds`
-- `getIncidentDetail`
+- what happened
+- where it happened
+- when it was observed
+- the transport context around the event
+- community signals where available
 
-## Supabase RPCs in use
+## How to read incident information
 
-Those loaders currently read through:
+- incident information may be based on rider or community reporting
+- new information can change how an incident is shown
+- some incidents may remain visible only for a limited time
+- the platform is meant to improve awareness, not to replace official channels
 
-- `get_latest_incident_feed`
-- `get_incident_feed_in_bounds`
-- `get_incident_feed_detail`
-- `get_reporter_incident_votes`
+## Community input
 
-The latest feed is cached for 15 seconds when the request does not need
-per-device vote enrichment.
-
-## Current read model behavior
-
-The incident layer is already structured as a read model rather than a direct
-table dump.
-
-Current behavior includes:
-
-- map and home feeds reading pre-shaped incident results
-- detail pages reading a single incident feed record by `incident_id`
-- optional vote enrichment tied to the reporter device hash
-- bounds-based reads for the map experience
-
-## Main tables behind the flow
-
-- `incidents`
-- `incident_types`
-- `incident_categories`
-- `incident_reports`
-- `incident_verifications`
-- `incident_report_media`
-
-## Documentation rule
-
-Incident docs should keep describing the public read contract, not the internal
-processing internals. That matches the existing repo notes that warn against
-exposing internal cluster and metrics tables directly.
+Where available, users may help confirm or challenge incident visibility through
+community feedback. This helps TIBS distinguish stronger signals from weaker
+ones over time.

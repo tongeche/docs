@@ -1,12 +1,10 @@
 ---
 title: "TIBS documentation"
-description: "Product, API, repository, and legal documentation for TIBS and Tisab"
+description: "Product, legal, and platform guidance for TIBS"
 ---
 
 <Note>
-  This site is being converted from the Mintlify starter into the main
-  documentation hub for TIBS. Product docs are now scaffolded. Legal and
-  repo-specific content will be filled from the selected source repositories.
+  Welcome to the main documentation hub for TIBS.
 </Note>
 
 ## Start here
@@ -17,8 +15,7 @@ description: "Product, API, repository, and legal documentation for TIBS and Tis
   href="/quickstart"
   horizontal
 >
-  Use the docs by role: product reader, API integrator, legal reviewer, or
-  contributor.
+  Choose the right path based on what you want to do with TIBS.
 </Card>
 
 ## Documentation areas
@@ -29,69 +26,53 @@ description: "Product, API, repository, and legal documentation for TIBS and Tis
     icon="map"
     href="/product/overview"
   >
-    Core workflows, operating domains, and data surfaces across TIBS.
-  </Card>
-  <Card
-    title="API docs"
-    icon="terminal"
-    href="/api-reference/introduction"
-  >
-    Endpoint map, domain boundaries, and the path to a full OpenAPI spec.
+    Learn how reporting, incidents, vehicles, feedback, and other TIBS
+    experiences work.
   </Card>
   <Card
     title="Legal docs"
     icon="book-open-cover"
     href="/legal/index"
   >
-    Privacy, terms, and data-processing documents in one controlled section.
+    Find privacy, reporting, participation, and related legal information.
   </Card>
   <Card
-    title="Repository docs"
-    icon="github"
-    href="/repositories"
+    title="API docs"
+    icon="terminal"
+    href="/api-reference/introduction"
   >
-    A single docs site that can pull structure and reference material from
-    multiple repos.
+    Explore the technical interfaces and integration surfaces used across TIBS.
+  </Card>
+  <Card
+    title="Developer docs"
+    icon="pen-to-square"
+    href="/development"
+  >
+    Run the docs site and connected TIBS services locally.
   </Card>
 </Columns>
 
-## Current product surfaces
+## Main TIBS areas
 
-The current documentation scaffold is based on the endpoint-to-table mapping in
-`references/tibs_ref.md`. The main TIBS domains already identified are:
-
-- Reports
-- Incidents
-- Vehicles
-- Feedback
-- Search
-- Corridors, routes, and saccos
-- Surveyor operations
-- Learning
-- Restricted admin flows
+- report safety and service issues
+- follow incidents and live transport signals
+- look up vehicles before or after a ride
+- share ride feedback
+- explore corridors, routes, and transport coverage
+- support survey and learning programs where available
 
 <Columns cols={2}>
   <Card
-    title="Browse product domains"
+    title="Browse product areas"
     href="/product/overview"
   >
-    Start from a domain overview and then drill into the workflows that matter.
+    Start with the main TIBS experiences and follow the section most relevant
+    to you.
   </Card>
   <Card
-    title="See the API map"
-    href="/api-reference/domain-map"
+    title="Visit the legal center"
+    href="/legal/index"
   >
-    Use the current endpoint map until the formal OpenAPI document is ready.
+    Review privacy, reporting, and participation information in one place.
   </Card>
 </Columns>
-
-## Contributing
-
-<Card
-  title="Contributor guide"
-  icon="pen-to-square"
-  href="/development"
->
-  Run the site locally, validate links, and keep content aligned with the
-  selected repos.
-</Card>

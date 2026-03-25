@@ -1,85 +1,60 @@
 ---
-title: "tibs-learning-center"
-description: "Standalone learning product for courses, assessments, and progress"
+title: "Learning center"
+description: "Overview of the TIBS learning service"
 ---
 
-## Purpose
+## What it is
 
-`tibs-learning-center` is the standalone learning surface for TIBS. It is
-deployed separately from the main app but is designed to share authentication
-and backend identity with the other TIBS apps.
+The learning center is the TIBS service for guided learning, readiness support,
+and course-based progress.
 
-## Stack
+It is separate from the main rider experience, but it remains connected to the
+wider TIBS platform.
 
-- npm workspaces
-- Next.js 16 web app
-- React 19
-- Tailwind CSS v4
-- Supabase
-- Netlify
+## What it is used for
 
-## Current route surface
+The learning center can be used for:
 
-The current route map shows a real learning product, including:
+- onboarding
+- guided learning
+- assessments
+- role-specific training
+- progress tracking
 
-- `/`
-- `/courses/[slug]`
-- `/courses/[slug]/assessments/[assessmentId]`
-- `/learn/[slug]`
-- `/account`
-- `/privacy`
-- `/terms`
-- `/about`
-- auth callback and recovery flows
+## Main experiences
 
-The home page and course routes are course-centric and no longer match the main
-transport safety product shell.
+Users may find experiences such as:
 
-## Current course model
+- courses
+- modules and lessons
+- assessments
+- account and progress pages
+- privacy and terms information related to the learning service
 
-The app currently includes:
+## Who it is for
 
-- featured course tracks
-- learning search
-- lesson navigation
-- resources per course
-- assessments and final tests
-- learning progress summaries
+Depending on the program, the learning center may serve:
 
-## Environment and local setup
+- public users
+- survey participants
+- program-specific learners
+- teams using TIBS readiness or onboarding material
 
-From the repo root:
+## Service address
 
-```bash
-npm install
-npm run dev
-```
+`https://tibs-learning-center.netlify.app`
 
-Key env groups visible in `.env.example`:
+## How it connects to the rest of TIBS
 
-- public learning-center origin
-- server-side origin override
-- Supabase public keys
-- optional server-side Supabase fallbacks
-- secret key for admin/server actions
+The learning center connects with the wider platform by:
 
-## Deployment
+- sharing sign-in with connected TIBS services
+- supporting readiness and onboarding journeys
+- linking learning progress to specific programs where applicable
 
-- Root command: `npm run build`
-- Root Netlify config: `netlify.toml`
-- Root workspace script delegates to `@tibs-learning-center/web`
+## Looking for technical detail?
 
-## Notes on source quality
+For developer and integration material, continue to:
 
-Some internal docs in this repo still contain copied blueprint text from the
-main `tibs` repo. For documentation purposes, prefer the actual route and
-component structure over stale internal handoff notes when the two conflict.
-
-## Why this repo matters to this docs site
-
-This repo is the primary source for:
-
-- Learning product docs
-- Course and assessment docs
-- Shared-auth handoff details for cross-app access
-- Learning-specific privacy and terms surfaces
+- [Platform development](/development)
+- [API introduction](/api-reference/introduction)
