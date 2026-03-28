@@ -92,20 +92,20 @@
         "tab": "API",
         "groups": [
           {
-            "group": "Current implementation",
+            "group": "Core API",
             "pages": [
               "api-reference/introduction",
+              "api-reference/core-api"
+            ]
+          },
+          {
+            "group": "Repo-specific interfaces",
+            "pages": [
               "api-reference/live-interfaces",
               "api-reference/public-app-routes",
               "api-reference/restricted-operations-routes",
               "api-reference/learning-and-auth",
               "api-reference/domain-map"
-            ]
-          },
-          {
-            "group": "Future contract",
-            "pages": [
-              "api-reference/future-public-api"
             ]
           }
         ]

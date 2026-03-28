@@ -1,50 +1,26 @@
 ---
-title: "Future public API draft"
-description: "How to interpret the draft openapi.json file in this docs repo"
+title: "Legacy API draft note"
+description: "The old future-draft page has been superseded by the live TIBS Core API docs"
 ---
 
-## What this file is
+The old “future public API draft” framing is obsolete.
 
-The `api-reference/openapi.json` file in this docs repo is a **future public API
-draft**.
+TIBS now has a live dedicated backend service documented at
+[TIBS Core API](/api-reference/core-api).
 
-It is useful for shaping a cleaner external contract across reports, incidents,
-vehicles, feedback, surveyor workflows, and learning workflows.
+Use that page for:
 
-## What this file is not
+- the live service URL
+- current auth models
+- the real domain inventory
+- synced OpenAPI artifacts from the `api` repository
 
-It is **not** the current production route inventory.
+The raw spec snapshots still live here:
 
-The live interfaces today are still split across:
+- [openapi.json](/api-reference/openapi.json)
+- [openapi.yaml](/api-reference/openapi.yaml)
 
-- `tibs` route handlers
-- `tibs-survey` restricted route handlers
-- `tibs-learning-center` auth callbacks and Supabase usage
-
-Use these pages for the current implementation:
-
-- [Live interfaces](/api-reference/live-interfaces)
-- [Public app routes](/api-reference/public-app-routes)
-- [Restricted operations routes](/api-reference/restricted-operations-routes)
-- [Learning and auth](/api-reference/learning-and-auth)
-
-## Current gaps before this becomes real
-
-The draft OpenAPI file still needs:
-
-- a real production server URL
-- a final auth model
-- stable request and response envelopes
-- error formats and status conventions
-- examples that match live behavior
-- a decision on which internal routes stay internal and which become public
-
-## Recommended use
-
-Use the OpenAPI draft when:
-
-- designing a cleaner external API surface
-- reviewing naming consistency across domains
-- planning a future dedicated API origin
-
-Do not use it as the only source of truth for current implementation behavior.
+If you were using this page as a link target, switch to
+[TIBS Core API](/api-reference/core-api) for the live contract and
+[Live interfaces](/api-reference/live-interfaces) for the wider repo-by-repo
+surface.

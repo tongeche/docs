@@ -1,23 +1,26 @@
 ---
 title: "Live interfaces"
-description: "What is actually implemented today across tibs, tibs-survey, and tibs-learning-center"
+description: "What is actually implemented today across api, tibs, tibs-survey, and tibs-learning-center"
 ---
 
 ## Current reality
 
-TIBS does not currently expose one unified public API service.
+TIBS now exposes one dedicated shared backend service through `tibs-api`.
 
-The live integration surface is split across:
+The wider live integration surface is still split across:
 
+- the dedicated NestJS backend in `api`
 - Next.js route handlers in `tibs`
 - Next.js route handlers in `tibs-survey`
 - route handlers and callback routes in `tibs-learning-center`
-- direct browser or server calls to Supabase RPCs and tables
+- direct browser or server calls to Supabase RPCs and tables where app-local
+  behavior still exists
 
 ## Interface classes
 
 | Interface class | Where it appears | Current access model |
 | --- | --- | --- |
+| Core API service | `tibs-api` | public, bearer-token, scoped external API key, surveyor, or admin access depending on route |
 | Public and device-scoped | `tibs` public route handlers | no account required, but device hash and service-area checks may apply |
 | Signed-in user | selected `tibs` and `tibs-learning-center` routes | shared Supabase user session required |
 | Project-authenticated | `tibs-survey` catalog and user workflow routes | signed-in project session required |
@@ -26,6 +29,17 @@ The live integration surface is split across:
 | Webhook-secret | `tibs-survey` webhook route | request must carry the configured webhook secret |
 
 ## Repo-by-repo split
+
+### `api`
+
+The shared backend now exposes centralized routes for:
+
+- health and session identity
+- scoped external API keys
+- reports, incidents, vehicles, feedback, corridors, routes, saccos, and search
+- learning progress and course listing
+- surveyor session and stats endpoints
+- admin review and role provisioning
 
 ### `tibs`
 
@@ -70,13 +84,15 @@ Its live interface layer is instead:
 
 When writing API docs for TIBS, distinguish clearly between:
 
+- the dedicated `tibs-api` service and its generated OpenAPI contract
 - live app routes that already exist
 - internal Supabase RPCs used behind those routes
-- future external API shapes that are not yet formalized
+- app-local proxies or callbacks that are not the same thing as the shared API
 
 ## Next pages
 
+- [TIBS Core API](/api-reference/core-api)
 - [Public app routes](/api-reference/public-app-routes)
 - [Restricted operations routes](/api-reference/restricted-operations-routes)
 - [Learning and auth](/api-reference/learning-and-auth)
-- [Future public API draft](/api-reference/future-public-api)
+- [API domain map](/api-reference/domain-map)

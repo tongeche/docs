@@ -1,0 +1,861 @@
+openapi: 3.0.0
+paths:
+  /api/v1/auth/me:
+    get:
+      operationId: AuthController_getMe_v1
+      parameters: []
+      responses:
+        "200":
+          description: Returns the authenticated user identity and resolved application
+            roles.
+      security:
+        - supabase-bearer: []
+      summary: Return the current authenticated user session
+      tags:
+        - Auth
+  /api/v1/api-keys:
+    get:
+      operationId: ApiKeysController_listApiKeys_v1
+      parameters: []
+      responses:
+        "200":
+          description: Returns external API keys that the current user can manage.
+            Plaintext tokens are never returned here.
+      security: &a1
+        - supabase-bearer: []
+      summary: List API keys owned by the current user
+      tags: &a2
+        - API Keys
+    post:
+      operationId: ApiKeysController_createApiKey_v1
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateApiKeyDto"
+      responses:
+        "201":
+          description: Creates a new external API key and returns the plaintext token
+            exactly once.
+      security: *a1
+      summary: Create a new external API key
+      tags: *a2
+  /api/v1/api-keys/{id}:
+    delete:
+      operationId: ApiKeysController_revokeApiKey_v1
+      parameters:
+        - name: id
+          required: true
+          in: path
+          description: External API key identifier.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Revokes the selected API key and returns the updated key state.
+      security: *a1
+      summary: Revoke an external API key
+      tags: *a2
+  /api/v1/reports:
+    post:
+      operationId: ReportsController_create_v1
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateReportDto"
+      responses:
+        "201":
+          description: Returns the created report and any resolved incident link.
+      security:
+        - supabase-bearer: []
+      summary: Submit an incident report
+      tags:
+        - Reports
+  /api/v1/incidents/nearby:
+    get:
+      description: Use bounds or latitude/longitude to filter geographically;
+        otherwise the latest feed is returned.
+      operationId: IncidentsController_getNearby_v1
+      parameters:
+        - name: south
+          required: false
+          in: query
+          description: Bounding box south latitude.
+          schema:
+            type: number
+        - name: west
+          required: false
+          in: query
+          description: Bounding box west longitude.
+          schema:
+            type: number
+        - name: north
+          required: false
+          in: query
+          description: Bounding box north latitude.
+          schema:
+            type: number
+        - name: east
+          required: false
+          in: query
+          description: Bounding box east longitude.
+          schema:
+            type: number
+        - name: latitude
+          required: false
+          in: query
+          description: Center latitude for radius-based lookup.
+          schema:
+            type: number
+        - name: longitude
+          required: false
+          in: query
+          description: Center longitude for radius-based lookup.
+          schema:
+            type: number
+        - name: radiusMeters
+          required: false
+          in: query
+          description: Search radius in meters when latitude/longitude are supplied.
+          schema:
+            minimum: 100
+            maximum: 50000
+            example: 2000
+            type: number
+        - name: limit
+          required: false
+          in: query
+          description: Maximum number of incidents to return.
+          schema:
+            minimum: 1
+            maximum: 100
+            example: 20
+            type: number
+        - name: X-API-KEY
+          in: header
+          description: "Scoped external API key accepted for this route. Required scopes:
+            incidents:read."
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Returns public incident feed items.
+      security:
+        - &a3
+          supabase-bearer: []
+        - external-api-key: []
+      summary: List nearby or latest incidents
+      tags: &a4
+        - Incidents
+  /api/v1/incidents/{id}:
+    get:
+      operationId: IncidentsController_getById_v1
+      parameters:
+        - name: id
+          required: true
+          in: path
+          description: Incident identifier.
+          schema:
+            type: string
+        - name: X-API-KEY
+          in: header
+          description: "Scoped external API key accepted for this route. Required scopes:
+            incidents:read."
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Returns detailed public incident data.
+      security:
+        - *a3
+        - external-api-key: []
+      summary: Get a single incident by id
+      tags: *a4
+  /api/v1/vehicles/{identifier}/incidents:
+    get:
+      operationId: VehiclesController_getVehicleIncidents_v1
+      parameters:
+        - name: identifier
+          required: true
+          in: path
+          description: Vehicle public code or plate number.
+          schema:
+            type: string
+        - name: limit
+          required: false
+          in: query
+          description: Maximum number of incidents to return.
+          schema:
+            type: number
+        - name: X-API-KEY
+          in: header
+          description: "Scoped external API key accepted for this route. Required scopes:
+            vehicles:read."
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Returns incidents for the resolved vehicle.
+      security:
+        - &a5
+          supabase-bearer: []
+        - external-api-key: []
+      summary: List incidents for a vehicle
+      tags: &a6
+        - Vehicles
+  /api/v1/vehicles/{identifier}:
+    get:
+      operationId: VehiclesController_getVehicle_v1
+      parameters:
+        - name: identifier
+          required: true
+          in: path
+          description: Vehicle public code or plate number.
+          schema:
+            type: string
+        - name: X-API-KEY
+          in: header
+          description: "Scoped external API key accepted for this route. Required scopes:
+            vehicles:read."
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Returns the resolved vehicle profile.
+      security:
+        - *a5
+        - external-api-key: []
+      summary: Get the public profile for a vehicle
+      tags: *a6
+  /api/v1/feedback:
+    post:
+      operationId: FeedbackController_create_v1
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateFeedbackDto"
+      responses:
+        "201":
+          description: Returns the created feedback summary.
+      security: &a7
+        - supabase-bearer: []
+      summary: Submit ride feedback
+      tags: &a8
+        - Feedback
+  /api/v1/vehicles/{identifier}/feedback-summary:
+    get:
+      operationId: FeedbackController_getVehicleFeedbackSummary_v1
+      parameters:
+        - name: identifier
+          required: true
+          in: path
+          description: Vehicle public code or plate number.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Returns sentiment counts and recent feedback for a vehicle.
+      security: *a7
+      summary: Get public feedback summary for a vehicle
+      tags: *a8
+  /api/v1/corridors:
+    get:
+      operationId: CorridorsController_getCorridors_v1
+      parameters:
+        - name: X-API-KEY
+          in: header
+          description: "Scoped external API key accepted for this route. Required scopes:
+            corridors:read."
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Returns corridor summaries.
+      security:
+        - &a9
+          supabase-bearer: []
+        - external-api-key: []
+      summary: List corridor public overviews
+      tags: &a10
+        - Corridors
+  /api/v1/corridors/{id}/incidents:
+    get:
+      operationId: CorridorsController_getCorridorIncidents_v1
+      parameters:
+        - name: id
+          required: true
+          in: path
+          description: Corridor identifier.
+          schema:
+            type: string
+        - name: limit
+          required: false
+          in: query
+          description: Maximum number of incidents to return.
+          schema:
+            type: number
+        - name: X-API-KEY
+          in: header
+          description: "Scoped external API key accepted for this route. Required scopes:
+            corridors:read."
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Returns recent incidents for a corridor.
+      security:
+        - *a9
+        - external-api-key: []
+      summary: List recent incidents for a corridor
+      tags: *a10
+  /api/v1/routes:
+    get:
+      operationId: RoutesController_getRoutes_v1
+      parameters:
+        - name: X-API-KEY
+          in: header
+          description: "Scoped external API key accepted for this route. Required scopes:
+            routes:read."
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Returns public route data.
+      security:
+        - supabase-bearer: []
+        - external-api-key: []
+      summary: List routes and linked corridors
+      tags:
+        - Routes
+  /api/v1/saccos:
+    get:
+      operationId: SaccosController_getSaccos_v1
+      parameters:
+        - name: X-API-KEY
+          in: header
+          description: "Scoped external API key accepted for this route. Required scopes:
+            saccos:read."
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Returns public SACCO data.
+      security:
+        - &a11
+          supabase-bearer: []
+        - external-api-key: []
+      summary: List SACCO public profiles
+      tags: &a12
+        - Saccos
+  /api/v1/saccos/{id}/vehicles:
+    get:
+      operationId: SaccosController_getSaccoVehicles_v1
+      parameters:
+        - name: id
+          required: true
+          in: path
+          description: SACCO identifier.
+          schema:
+            type: string
+        - name: X-API-KEY
+          in: header
+          description: "Scoped external API key accepted for this route. Required scopes:
+            vehicles:read."
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Returns vehicles for the SACCO.
+      security:
+        - *a11
+        - external-api-key: []
+      summary: List vehicles belonging to a SACCO
+      tags: *a12
+  /api/v1/surveyor/session/start:
+    post:
+      operationId: SurveyorController_startSession_v1
+      parameters:
+        - name: user-agent
+          required: true
+          in: header
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StartSurveyorSessionDto"
+      responses:
+        "201":
+          description: Returns the started session.
+      security: &a13
+        - supabase-bearer: []
+      summary: Start a surveyor work session
+      tags: &a14
+        - Surveyor
+  /api/v1/surveyor/assignments:
+    get:
+      operationId: SurveyorController_getAssignments_v1
+      parameters: []
+      responses:
+        "200":
+          description: Returns route and corridor assignments.
+      security: *a13
+      summary: List assignments for the current surveyor
+      tags: *a14
+  /api/v1/surveyor/stats:
+    get:
+      operationId: SurveyorController_getStats_v1
+      parameters:
+        - name: from
+          required: false
+          in: query
+          description: Inclusive start date in YYYY-MM-DD format.
+          schema:
+            example: 2026-03-21
+            type: string
+        - name: to
+          required: false
+          in: query
+          description: Inclusive end date in YYYY-MM-DD format.
+          schema:
+            example: 2026-03-27
+            type: string
+      responses:
+        "200":
+          description: Returns surveyor day-by-day work totals.
+      security: *a13
+      summary: Load the current surveyor activity summary
+      tags: *a14
+  /api/v1/learning/courses:
+    get:
+      operationId: LearningController_getCourses_v1
+      parameters: []
+      responses:
+        "200":
+          description: Returns the learning catalog.
+      security: &a15
+        - supabase-bearer: []
+      summary: List active learning courses and modules
+      tags: &a16
+        - Learning
+  /api/v1/learning/progress:
+    get:
+      operationId: LearningController_getProgress_v1
+      parameters: []
+      responses:
+        "200":
+          description: Returns progress grouped by course.
+      security: *a15
+      summary: Get the current user learning progress
+      tags: *a16
+  /api/v1/search:
+    get:
+      operationId: SearchController_search_v1
+      parameters:
+        - name: q
+          required: true
+          in: query
+          description: Search phrase.
+          schema:
+            example: rongai
+            type: string
+        - name: limit
+          required: false
+          in: query
+          description: Maximum items to return per group.
+          schema:
+            minimum: 1
+            maximum: 20
+            example: 5
+            type: number
+        - name: X-API-KEY
+          in: header
+          description: "Scoped external API key accepted for this route. Required scopes:
+            search:read."
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Returns cross-domain search results.
+      security:
+        - supabase-bearer: []
+        - external-api-key: []
+      summary: Search across vehicles, SACCOs, and routes
+      tags:
+        - Search
+  /api/v1/admin/review-queue:
+    get:
+      operationId: AdminController_getReviewQueue_v1
+      parameters:
+        - name: limit
+          required: false
+          in: query
+          description: Maximum number of queue items to return.
+          schema:
+            minimum: 1
+            maximum: 100
+            example: 20
+            type: number
+        - name: statuses
+          required: false
+          in: query
+          description: Optional review statuses to include.
+          schema:
+            example:
+              - pending
+              - assigned
+            type: array
+            items:
+              type: string
+      responses:
+        "200":
+          description: Returns queue items for incident review.
+      security: &a17
+        - supabase-bearer: []
+      summary: Load the incident review queue
+      tags: &a18
+        - Admin
+  /api/v1/admin/review:
+    post:
+      operationId: AdminController_reviewIncident_v1
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReviewIncidentDto"
+      responses:
+        "200":
+          description: Returns the updated review queue item.
+      security: *a17
+      summary: Record an admin review decision for an incident
+      tags: *a18
+  /api/v1/admin/users/{userId}/roles:
+    get:
+      operationId: AdminController_getUserRoles_v1
+      parameters:
+        - name: userId
+          required: true
+          in: path
+          description: Supabase auth user identifier.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Returns the current role assignment for the target user.
+      security: *a17
+      summary: Load application roles assigned to a user
+      tags: *a18
+    put:
+      operationId: AdminController_updateUserRoles_v1
+      parameters:
+        - name: userId
+          required: true
+          in: path
+          description: Supabase auth user identifier.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateUserRolesDto"
+      responses:
+        "200":
+          description: Returns the updated role assignment. The target user must refresh
+            their session to pick up new claims.
+      security: *a17
+      summary: Replace application roles assigned to a user
+      tags: *a18
+  /api/v1/health:
+    get:
+      operationId: AppController_getHealth_v1
+      parameters: []
+      responses:
+        "200":
+          description: Returns service health metadata.
+      summary: Check API health
+      tags:
+        - Health
+info:
+  title: TIBS Core API
+  description: Centralized API layer for TIBS applications backed by Supabase.
+  version: 1.0.0
+  contact: {}
+tags: []
+servers: []
+components:
+  securitySchemes:
+    supabase-bearer:
+      scheme: bearer
+      bearerFormat: JWT
+      type: http
+      description: Supabase access token required for every non-public TIBS API route.
+    external-api-key:
+      type: apiKey
+      in: header
+      name: X-API-KEY
+      description: User-managed external API key for scoped read-only access on
+        selected routes.
+  schemas:
+    CreateApiKeyDto:
+      type: object
+      properties:
+        name:
+          type: string
+          description: User-facing name for the external API key.
+          example: Map Widget Production
+          minLength: 3
+          maxLength: 120
+        scopes:
+          type: array
+          description: Scopes granted to the external API key.
+          example:
+            - incidents:read
+            - search:read
+          items:
+            type: string
+            enum:
+              - corridors:read
+              - incidents:read
+              - routes:read
+              - saccos:read
+              - search:read
+              - vehicles:read
+        expiresAt:
+          type: string
+          description: Optional ISO timestamp after which the key is no longer accepted.
+          example: 2026-12-31T23:59:59.000Z
+      required:
+        - name
+        - scopes
+    CreateReportDto:
+      type: object
+      properties:
+        deviceHash:
+          type: string
+          description: Stable hash that identifies the reporting device.
+          example: f48cb3ad7f9f2fe0
+        incidentTypeCode:
+          type: string
+          description: Incident type code understood by the database function.
+          example: reckless_driving
+        latitude:
+          type: number
+          description: Incident latitude.
+          example: -1.286389
+        longitude:
+          type: number
+          description: Incident longitude.
+          example: 36.817223
+        plateNumber:
+          type: string
+          description: Vehicle plate number when known.
+          example: KDA 123A
+        qrToken:
+          type: string
+          description: Vehicle QR token when scanned.
+          example: veh_qr_32f0f1
+        shortDescription:
+          type: string
+          description: Short free-text description of the incident.
+          example: Driver was overtaking dangerously near the stage.
+        routeName:
+          type: string
+          description: Observed route name when known.
+          example: CBD - Rongai
+        corridorName:
+          type: string
+          description: Observed corridor name when known.
+          example: Langata Road
+        vehicleType:
+          type: string
+          description: Vehicle type descriptor when available.
+          example: matatu
+        locationAccuracyM:
+          type: number
+          description: Estimated location accuracy in meters.
+          example: 12
+        happenedAt:
+          type: string
+          description: ISO timestamp when the incident happened.
+          example: 2026-03-27T10:30:00.000Z
+        mediaIds:
+          description: Optional uploaded media identifiers.
+          example:
+            - 9e84c25f-fcbc-4444-9e2f-f0f627f2d5d5
+          type: array
+          items:
+            type: string
+            format: uuid
+        locationLabel:
+          type: string
+          description: Human-readable location label.
+          example: Railways Stage
+        candidateVehicleId:
+          type: string
+          description: Candidate vehicle identifier resolved client-side.
+          example: 2b8e2f8d-8037-4f9c-8628-55b5bc87c8d1
+        candidatePublicCode:
+          type: string
+          description: Candidate vehicle public code.
+          example: TIBS-2041
+        candidatePlateNumber:
+          type: string
+          description: Candidate vehicle plate number.
+          example: KDA 123A
+        candidateRouteName:
+          type: string
+          description: Candidate route name.
+          example: CBD - Rongai
+        candidateCorridorName:
+          type: string
+          description: Candidate corridor name.
+          example: Langata Road
+        candidateScore:
+          type: number
+          description: Client-side confidence score for the vehicle candidate.
+          example: 0.82
+      required:
+        - deviceHash
+        - incidentTypeCode
+        - latitude
+        - longitude
+    CreateFeedbackDto:
+      type: object
+      properties:
+        deviceHash:
+          type: string
+          description: Stable hash that identifies the reporting device.
+          example: f48cb3ad7f9f2fe0
+        sentimentCode:
+          type: string
+          description: Sentiment code selected by the rider.
+          example: positive
+        plateNumber:
+          type: string
+          description: Observed vehicle plate number.
+          example: KDA 123A
+        qrToken:
+          type: string
+          description: Optional QR token scanned from the vehicle.
+          example: veh_qr_32f0f1
+        tagCodes:
+          description: Feedback tag codes selected by the rider.
+          example:
+            - clean
+            - respectful_staff
+          type: array
+          items:
+            type: string
+        comment:
+          type: string
+          description: Optional free-text rider comment.
+          example: Driver was polite and the vehicle was clean.
+        routeName:
+          type: string
+          description: Observed route name when known.
+          example: CBD - Rongai
+        vehicleType:
+          type: string
+          description: Vehicle type descriptor when available.
+          example: matatu
+        latitude:
+          type: number
+          description: Approximate latitude where the feedback was captured.
+          example: -1.286389
+        longitude:
+          type: number
+          description: Approximate longitude where the feedback was captured.
+          example: 36.817223
+        locationAccuracyM:
+          type: number
+          description: Estimated location accuracy in meters.
+          example: 15
+        mediaIds:
+          description: Optional uploaded media identifiers.
+          example:
+            - 9e84c25f-fcbc-4444-9e2f-f0f627f2d5d5
+          type: array
+          items:
+            type: string
+            format: uuid
+      required:
+        - deviceHash
+        - sentimentCode
+    StartSurveyorSessionDto:
+      type: object
+      properties:
+        corridorId:
+          type: string
+          description: Corridor identifier tied to the session start.
+          example: 2b8e2f8d-8037-4f9c-8628-55b5bc87c8d1
+        startedLatitude:
+          type: number
+          description: Latitude where the session was started.
+          example: -1.286389
+        startedLongitude:
+          type: number
+          description: Longitude where the session was started.
+          example: 36.817223
+    ReviewIncidentDto:
+      type: object
+      properties:
+        incidentId:
+          type: string
+          description: Incident identifier under review.
+          example: 2b8e2f8d-8037-4f9c-8628-55b5bc87c8d1
+        decisionType:
+          type: string
+          description: Decision type recorded by the reviewer.
+          example: approve
+        decisionReason:
+          type: string
+          description: Optional reason attached to the review decision.
+          example: Verified against supporting evidence.
+        decisionPayload:
+          type: object
+          description: Optional structured payload for downstream review workflows.
+          example:
+            confidenceOverride: high
+        closeQueue:
+          type: boolean
+          description: Whether the related queue item should be closed.
+          example: true
+      required:
+        - incidentId
+        - decisionType
+    UpdateUserRolesDto:
+      type: object
+      properties:
+        roles:
+          description: Application roles to assign to the target user.
+          example:
+            - surveyor
+          type: array
+          items:
+            type: string
+      required:
+        - roles

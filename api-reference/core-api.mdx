@@ -1,0 +1,89 @@
+---
+title: "TIBS Core API"
+description: "Live dedicated backend service and generated OpenAPI contract for TIBS"
+---
+
+<Note>
+  `tibs-api` is now the real shared backend service for TIBS. The OpenAPI files
+  in this docs repo are synced from the API repository and should be treated as
+  a live contract snapshot, not a future draft.
+</Note>
+
+## Live service
+
+- Base service URL: `https://tibs-api.onrender.com`
+- Versioned base path: `/api/v1`
+- Health check: `https://tibs-api.onrender.com/api/v1/health`
+- Swagger UI: `https://tibs-api.onrender.com/api/docs`
+- Redoc: `https://tibs-api.onrender.com/api/redoc`
+- Live OpenAPI JSON: `https://tibs-api.onrender.com/api/openapi.json`
+- Live OpenAPI YAML: `https://tibs-api.onrender.com/api/openapi.yaml`
+
+This docs repo also keeps synced snapshots for reference:
+
+- [openapi.json](/api-reference/openapi.json)
+- [openapi.yaml](/api-reference/openapi.yaml)
+
+## Authentication and access
+
+| Access model | How it works | Typical routes |
+| --- | --- | --- |
+| Public | No token required | `/api/v1/health` |
+| Bearer token | `Authorization: Bearer <supabase_access_token>` | most non-public routes |
+| External API key | `X-API-KEY: tibs_live_<prefix>_<secret>` on selected read-only routes | search, incidents, vehicles, corridors, routes, saccos |
+| Surveyor role | Bearer token plus `surveyor` role | `/api/v1/surveyor/*` |
+| Admin role | Bearer token plus `admin` role | `/api/v1/admin/*` |
+
+## Current domains
+
+| Domain | Representative routes |
+| --- | --- |
+| Health | `GET /api/v1/health` |
+| Auth | `GET /api/v1/auth/me` |
+| API keys | `GET /api/v1/api-keys`, `POST /api/v1/api-keys`, `DELETE /api/v1/api-keys/{id}` |
+| Reports | `POST /api/v1/reports` |
+| Incidents | `GET /api/v1/incidents/nearby`, `GET /api/v1/incidents/{id}` |
+| Vehicles | `GET /api/v1/vehicles/{identifier}`, `GET /api/v1/vehicles/{identifier}/incidents` |
+| Feedback | `POST /api/v1/feedback`, `GET /api/v1/vehicles/{identifier}/feedback-summary` |
+| Corridors | `GET /api/v1/corridors`, `GET /api/v1/corridors/{id}/incidents` |
+| Routes | `GET /api/v1/routes` |
+| Saccos | `GET /api/v1/saccos`, `GET /api/v1/saccos/{id}/vehicles` |
+| Search | `GET /api/v1/search` |
+| Learning | `GET /api/v1/learning/courses`, `GET /api/v1/learning/progress` |
+| Surveyor | `POST /api/v1/surveyor/session/start`, `GET /api/v1/surveyor/assignments`, `GET /api/v1/surveyor/stats` |
+| Admin | `GET /api/v1/admin/review-queue`, `POST /api/v1/admin/review`, `GET/PUT /api/v1/admin/users/{userId}/roles` |
+
+## Quick examples
+
+Bearer-authenticated request:
+
+```bash
+curl -sS "https://tibs-api.onrender.com/api/v1/auth/me" \
+  -H "Authorization: Bearer $TOKEN"
+```
+
+External API key request:
+
+```bash
+curl -sS "https://tibs-api.onrender.com/api/v1/search?q=rongai" \
+  -H "X-API-KEY: $EXTERNAL_API_KEY"
+```
+
+## How to use this section
+
+- Use this page when you want the real shared backend service used across TIBS.
+- Use the synced OpenAPI files for generators, SDK work, and schema review.
+- Use the repo-specific interface pages when you need the remaining Next.js
+  route handlers and auth callbacks still living in `tibs`, `tibs-survey`, or
+  `tibs-learning-center`.
+
+<CardGroup cols={2}>
+  <Card title="Live interfaces" icon="route" href="/api-reference/live-interfaces">
+    See how the dedicated API service fits alongside the remaining app-specific
+    route handlers.
+  </Card>
+  <Card title="API introduction" icon="book" href="/api-reference/introduction">
+    Start at the section overview if you need the full map of API documentation
+    in this site.
+  </Card>
+</CardGroup>

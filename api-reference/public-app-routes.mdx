@@ -8,8 +8,8 @@ description: "Live route handlers currently exposed by the tibs rider applicatio
 This page documents the live route handlers currently implemented in the
 `tibs` repo under `apps/web/app/api`.
 
-These are real interfaces in code. They are not the same thing as the future
-external API draft in `openapi.json`.
+These are real interfaces in code. They are not the same thing as the dedicated
+shared backend documented in [TIBS Core API](/api-reference/core-api).
 
 ## Public read and discovery routes
 
@@ -47,7 +47,8 @@ external API draft in `openapi.json`.
   account is required
 - service-area enforcement is already part of the contract for report and quick
   feedback submission
-- these handlers are backed by Supabase RPCs, not by a standalone API server
+- these handlers are app-local route handlers, not the dedicated `tibs-api`
+  service
 - some live route handlers also exist outside `/api`, such as `/rate/submit`,
   but this page is limited to the `app/api` surface
 

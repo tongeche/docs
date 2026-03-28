@@ -5,25 +5,28 @@ description: "Current API reference entry point for TIBS"
 
 <Note>
   The current TIBS API section now distinguishes between:
-  1. live app interfaces already implemented in the repos
-  2. a future public API contract draft in `openapi.json`
+  1. the live dedicated TIBS Core API service in `tibs-api`
+  2. app-specific route handlers still exposed in the other repos
 </Note>
 
 ## What this section covers
 
-This section is organized around the real code already present in the confirmed
-repos:
+This section is organized around the real code already present across the
+confirmed repos:
 
+- `api` for the shared NestJS backend service
 - `tibs` live route handlers under `apps/web/app/api`
 - `tibs-survey` restricted route handlers under `app/api`
 - `tibs-learning-center` auth callback routes plus browser-side Supabase RPC
   usage
-- a future external API draft kept in `api-reference/openapi.json`
+- synced OpenAPI artifacts kept in `api-reference/openapi.json` and
+  `api-reference/openapi.yaml`
 
 ## Current source of truth
 
 Use these pages together:
 
+- [TIBS Core API](/api-reference/core-api)
 - [Live interfaces](/api-reference/live-interfaces)
 - [Public app routes](/api-reference/public-app-routes)
 - [Restricted operations routes](/api-reference/restricted-operations-routes)
@@ -32,34 +35,35 @@ Use these pages together:
 
 The current source repos behind those surfaces are:
 
+- `api` for the centralized backend, auth enforcement, and generated OpenAPI
+  spec
 - `tibs` for the main transport safety platform and Supabase schema
 - `tibs-survey` for surveyor operations and project workflows
 - `tibs-learning-center` for course progress and learning flows
 
-## Future contract
+## Shared backend service
 
-The draft OpenAPI file is still useful, but it should be treated as a future
-public contract, not as a description of the live route handlers.
+The generated OpenAPI files are now tied to a live deployed service rather than
+an imagined future contract.
 
-Use [Future public API draft](/api-reference/future-public-api) when you want
-the proposed external contract shape rather than the current repo
-implementation.
+Use [TIBS Core API](/api-reference/core-api) when you want the real dedicated
+backend surface for external integrations and cross-app backend behavior.
 
 <CardGroup cols={2}>
+  <Card
+    title="TIBS Core API"
+    icon="code"
+    href="/api-reference/core-api"
+  >
+    Start here for the dedicated backend service, auth models, and synced
+    OpenAPI contract.
+  </Card>
   <Card
     title="Live interfaces"
     icon="route"
     href="/api-reference/live-interfaces"
   >
-    Start here for the route handlers and Supabase-backed interfaces that exist
-    today.
-  </Card>
-  <Card
-    title="Future public API draft"
-    icon="code"
-    href="/api-reference/future-public-api"
-  >
-    Use this when you need the proposed external contract rather than the live
-    app routes.
+    Use this when you need the full platform split across `api`, `tibs`,
+    `tibs-survey`, and `tibs-learning-center`.
   </Card>
 </CardGroup>
